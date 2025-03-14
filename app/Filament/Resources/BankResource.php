@@ -29,7 +29,7 @@ class BankResource extends Resource
                     ->required()
                     ->maxLength(50),
                 Forms\Components\TextInput::make('bank')
-                    ->label('Bank Name')
+                    ->label(__('f28.bank_name'))
                     ->required()
                     ->maxLength(150),
             ]);
@@ -40,11 +40,11 @@ class BankResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('bank_code')
-                    ->label('Bank Code')
+                    ->label(__('f28.bank_code'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('bank')
-                    ->label('Bank Name')
+                    ->label(__('f28.bank_name'))
                     ->sortable()
                     ->searchable(),
             ])
