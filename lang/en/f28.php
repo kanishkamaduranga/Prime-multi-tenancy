@@ -7,5 +7,10 @@ return [
     'bank_code' =>  'Bank Code',
     'bank_name' =>  'Bank Name',
     'bank_account' =>  'Bank Account',
+    'department' => 'Department',
+    'department_code' => 'Department Code',
+    'branch_type_number'    =>  'Branch Type Number',
+    'branch_type_name'    =>  'Branch Type Name',
+    'branch_type' =>  'Branch Type',
 
 ];
