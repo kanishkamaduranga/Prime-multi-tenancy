@@ -15,4 +15,13 @@ return [
     'region'    => 'Region',
     'branch_code'   =>  'Branch Code',
     'branch_name'   =>  'Branch Name',
+
+    'external_person_number' => 'External Person Number',
+    'customer_number' => 'Customer Number',
+    'name' => 'Name',
+    'address'   => 'Address',
+    'nic_number'=>  'NIC Number',
+    'nic_validate'=>  'The NIC number must be either 12 digits or 9 digits followed by "V" or "X".',
+    'telephone_number' => 'Telephone Number',
+    'telephone_number_validate' => 'The telephone number must be 10 digits starting with 0.',
 ];
