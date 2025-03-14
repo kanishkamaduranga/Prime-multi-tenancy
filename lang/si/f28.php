@@ -12,5 +12,7 @@ return [
     'branch_type_number'    =>  'ශාඛා වර්ගයේ අංකය',
     'branch_type_name'  =>  'ශාඛා වර්ගයේ නම',
     'branch_type' =>  'ශාඛා වර්ග',
-
+    'region'    => 'ප්‍රදේශය',
+    'branch_code'   =>  'ශාඛා අංකය',
+    'branch_name'   =>  'ශාඛාවේ නම',
 ];

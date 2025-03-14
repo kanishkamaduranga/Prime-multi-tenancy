@@ -12,5 +12,7 @@ return [
     'branch_type_number'    =>  'Branch Type Number',
     'branch_type_name'    =>  'Branch Type Name',
     'branch_type' =>  'Branch Type',
-
+    'region'    => 'Region',
+    'branch_code'   =>  'Branch Code',
+    'branch_name'   =>  'Branch Name',
 ];
