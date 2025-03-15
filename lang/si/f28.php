@@ -32,4 +32,7 @@ return [
 
     'sub_account_number' =>  'උප ගිණුම් අංකය',
     'sub_account_name' =>  'උප ගිණුම් නම',
+
+    'journal_number'    =>  'ජර්නල් අංකය',
+    'journal'     =>  'ජර්නලය',
 ];

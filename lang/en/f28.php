@@ -32,4 +32,7 @@ return [
 
     'sub_account_number' =>  'Sub Account Number',
     'sub_account_name' =>  'Sub Account Name',
+
+    'journal_number'    =>  'Journal Number',
+    'journal'     =>  'Journal',
 ];
