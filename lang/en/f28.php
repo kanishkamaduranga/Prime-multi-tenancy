@@ -24,4 +24,9 @@ return [
     'nic_validate'=>  'The NIC number must be either 12 digits or 9 digits followed by "V" or "X".',
     'telephone_number' => 'Telephone Number',
     'telephone_number_validate' => 'The telephone number must be 10 digits starting with 0.',
+
+    'account_segments' => 'Account Segments',
+    'basic_accounts' =>  'Basic Accounts',
+    'account_name'  =>  'Account Name',
+    'account_number' =>  'Account Number',
 ];

@@ -15,8 +15,7 @@ return [
     'region'    => 'ප්‍රදේශය',
     'branch_code'   =>  'ශාඛා අංකය',
     'branch_name'   =>  'ශාඛාවේ නම',
-
-
+    
     'external_person_number' => 'බාහිර පුද්ගල අංකය',
     'customer_number' => 'පාරිභෝගික අංකය',
     'name' => 'නම',
@@ -25,4 +24,9 @@ return [
     'nic_validate'=>  'ජාතික හැඳුනුම්පත් අංකය ඉලක්කම් 12 කින් හෝ ඉලක්කම් 9 කින් පසුව "V" හෝ "X" විය යුතුය.',
     'telephone_number' => 'දුරකථන අංකය',
     'telephone_number_validate' => 'දුරකථන අංකය 0 න් ආරම්භ වන ඉලක්කම් 10 කින් යුක්ත විය යුතුය.',
+
+    'account_segments' => 'ගිණුම් ඛණ්ඩ',
+    'basic_accounts' =>  'මූලික ගිණුම්',
+    'account_name'  =>  'ගිණුමේ නම',
+    'account_number' =>  'ගිණුම් අංකය',
 ];

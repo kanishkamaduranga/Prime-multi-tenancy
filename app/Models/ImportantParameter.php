@@ -20,41 +20,6 @@ class ImportantParameter extends Model
         'label_en',
     ];
 
-    /**
-     * Get values based on the selected language.
-     *
-     * @param string $key
-     * @return array
-     */
-    public static function getValues($key)
-    {
-        $parameter = self::where('key', $key)->list();
-        $locale = LanguageService::getLocale();
 
-        if (!$parameter) {
-            return [];
-        }
 
-        $list = [];
-        foreach ($parameter as $item) {
-
-            $lable = '';
-
-            switch ($locale) {
-                case 'en':
-                    $lable = $item->label_en;
-                break;
-                case 'ta':
-                    $lable = $item->label_ta;
-                break;
-                case 'si':
-                    $lable = $item->label_esi;
-                break;
-            }
-
-            $list[$item['slug']] =  $lable;
-        }
-
-        return $list;
-    }
 }
