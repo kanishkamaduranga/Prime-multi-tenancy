@@ -29,4 +29,7 @@ return [
     'basic_accounts' =>  'මූලික ගිණුම්',
     'account_name'  =>  'ගිණුමේ නම',
     'account_number' =>  'ගිණුම් අංකය',
+
+    'sub_account_number' =>  'උප ගිණුම් අංකය',
+    'sub_account_name' =>  'උප ගිණුම් නම',
 ];
