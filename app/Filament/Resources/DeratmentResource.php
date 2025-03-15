@@ -51,6 +51,7 @@ class DeratmentResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make()->modal(),
                 Tables\Actions\EditAction::make()->modal(),
                 Tables\Actions\DeleteAction::make(), // Delete action
             ])

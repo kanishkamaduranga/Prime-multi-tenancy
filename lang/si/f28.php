@@ -15,7 +15,7 @@ return [
     'region'    => 'ප්‍රදේශය',
     'branch_code'   =>  'ශාඛා අංකය',
     'branch_name'   =>  'ශාඛාවේ නම',
-    
+
     'external_person_number' => 'බාහිර පුද්ගල අංකය',
     'customer_number' => 'පාරිභෝගික අංකය',
     'name' => 'නම',
