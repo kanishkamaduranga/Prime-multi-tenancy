@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ImportantParametersTableSeeder::class);
         $this->call(BasicAccounts::class);
+        $this->call(BasicLedgerSeeds::class);
     }
 }
