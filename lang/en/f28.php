@@ -30,9 +30,12 @@ return [
     'account_name'  =>  'Account Name',
     'account_number' =>  'Account Number',
 
+    'sub_account_segments' => 'Sub-account Segments',
     'sub_account_number' =>  'Sub Account Number',
     'sub_account_name' =>  'Sub Account Name',
 
     'journal_number'    =>  'Journal Number',
     'journal'     =>  'Journal',
+
+    'basic_ledger'  =>  'Basic Ledger',
 ];

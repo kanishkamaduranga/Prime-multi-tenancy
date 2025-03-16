@@ -30,9 +30,12 @@ return [
     'account_name'  =>  'ගිණුමේ නම',
     'account_number' =>  'ගිණුම් අංකය',
 
+    'sub_account_segments' => 'උප ගිණුම් ඛණ්ඩ',
     'sub_account_number' =>  'උප ගිණුම් අංකය',
     'sub_account_name' =>  'උප ගිණුම් නම',
 
     'journal_number'    =>  'ජර්නල් අංකය',
     'journal'     =>  'ජර්නලය',
+
+    'basic_ledger'  =>  'මූලික ලෙජරය',
 ];
