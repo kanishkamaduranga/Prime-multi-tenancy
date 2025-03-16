@@ -16,6 +16,7 @@ class Manager extends Model
         'control_account_id',
         'department_id',
         'branch_type_id',
+        'status'
     ];
 
     // Relationship to ControlAccount

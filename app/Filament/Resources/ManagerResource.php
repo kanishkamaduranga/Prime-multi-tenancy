@@ -66,6 +66,16 @@ class ManagerResource extends Resource
                     ->multiple()
                     ->searchable()
                     ->preload(),
+
+                Forms\Components\Select::make('status')
+                    ->label('Status')
+                    ->options([
+                        'active' => 'Active',
+                        'inactive' => 'Inactive',
+                        'suspended' => 'Suspended',
+                    ])
+                    ->default('active') // Default value
+                    ->required(),
             ]);
     }
 
@@ -79,6 +89,7 @@ class ManagerResource extends Resource
                 TextColumn::make('department.department')->label('Department')->sortable()->searchable(),
                 TextColumn::make('branchType.branch_type_name')->label('Branch Type')->sortable()->searchable(),
                // TextColumn::make('branches.branch_name')->label('Branches')->sortable()->searchable(),
+                TextColumn::make('status')->label('Status')->sortable()->searchable(),
             ])
             ->filters([
                 //
