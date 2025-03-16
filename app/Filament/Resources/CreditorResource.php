@@ -109,18 +109,6 @@ class CreditorResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('price')
-                    ->label(__('f28.price'))
-                    ->numeric()
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('year')
-                    ->label('Year')
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('month')
-                    ->label('Month')
-                    ->sortable(),
             ])
             ->filters([
                 //
