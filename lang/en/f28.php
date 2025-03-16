@@ -4,6 +4,14 @@ declare(strict_types=1);
 
 return [
     'Basic_Notes' => 'Basic Notes',
+    'Payment_Analysis' => 'Payment Analysis',
+    'Managers'  => 'Managers',
+    'Debtors'   => 'Debtors',
+    'Debtors_consumers'   => 'Debtors (consumers)',
+    'Vehicles' => 'Vehicles',
+    'Employee_information' => 'Employee information',
+    'Vehicles_rented' => 'Vehicles rented on a rental basis',
+
     'bank_code' =>  'Bank Code',
     'bank_name' =>  'Bank Name',
     'bank_account' =>  'Bank Account',
@@ -57,4 +65,29 @@ return [
     'year'  =>  'Year',
     'month'  =>  'Month',
     'creditors_number_placeholder' =>  'Auto-generated after saving',
+
+    'analysis_number'   =>  'Analysis Number',
+    'payment_analysis'   =>   'Payment Analysis',
+
+    'manager_number_placeholder' =>  'Auto-generated after saving',
+
+    'debtor_number' =>  'Debtors Number',
+    'debtor_number_placeholder' =>  'Auto-generated after saving',
+    'debtor_name' =>    'Debtors Name',
+    'saved_amount' => 'Saved Amount',
+    'date' =>  'Date',
+
+    'vehicle_number' =>  'Vehicle Number',
+    'fuel_quality_level'    =>  'Fuel Quality Level',
+    'fuel_type' =>  'Fuel Type',
+
+    'employee_number'   =>  'Employee Number',
+    'employee_name'   =>  'Employee Name',
+    'date_of_birth' =>  'Date Of Birth',
+    'etf_number'    =>  'ETF Number',
+    'employee_type' =>  'Employee Type',
+    'cashier' =>  'Cashier',
+
+    'payment_method'     =>  'Payment Method',
+
 ];

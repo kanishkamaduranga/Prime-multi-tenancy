@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 return [
     'Basic_Notes'   =>  'මූලික සටහන්',
+    'Payment_Analysis' => 'ගෙවීම් විග්‍රහය',
+    'Managers' => 'කළමණාකරුවන්',
+    'Debtors'   => 'ණය ගැතියන්',
+    'Debtors_consumers'   => 'ණය ගැතියන් (පරිභෝගිකයන්)',
+    'Vehicles' => 'රථ වාහන',
+    'Employee_information' => 'සේවක තොරතුරු',
+    'Vehicles_rented' => 'කුලී පදනමට ගත් වාහන',
+
+
     'bank_code' =>  'බැංකු කේතය',
     'bank_name' =>  'බැංකුවේ නම',
     'bank_account' =>  'බැංකු ගිණුම',
@@ -57,5 +66,25 @@ return [
     'year'  =>  'වර්ෂය',
     'month'  =>  'මාසය',
     'creditors_number_placeholder' =>  'සුරැකීමෙන් පසු ස්වයංක්‍රීයව ජනනය වේ',
+
+    'analysis_number'   =>  'විග්‍රහ අංකය',
+    'payment_analysis'   =>   'ගෙවීම් විග්‍රහය',
+
+    'debtor_number' =>  'ණයගැතියන්ගේ අංකය',
+    'debtor_number_placeholder' =>  'සුරැකීමෙන් පසු ස්වයංක්‍රීයව ජනනය වේ',
+    'debtor_name' =>    'ණයගැතියන්ගේ නම',
+    'saved_amount' => 'තැම්පත් කෙරු මුදල',
+    'date' =>  'දිනය',
+
+    'vehicle_number' =>  'වාහන අංකය',
+    'fuel_quality_level'    =>  'ඉන්ධන තත්ත්ව මට්ටම',
+    'fuel_type' =>  'ඉන්ධන වර්ගය',
+
+    'employee_number'   =>  'සේවක අංකය',
+    'employee_name'   =>  'සේවකයාගේ නම',
+    'date_of_birth' =>  'උපන් දිනය',
+    'etf_number'    =>  'ETF අංකය',
+    'employee_type' =>  'සේවක වර්ගය',
+    'cashier' =>  'මුදල් අයකැමි',
 
 ];

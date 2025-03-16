@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('creditors', function (Blueprint $table) {
             $table->id();
 
-            $table->string('creditors_number', 12)->unique(); // Auto-generated creditors number
+            $table->string('creditors_number', 12)->nullable()->unique(); // Auto-generated creditors number
             $table->string('customer_number', 20); // Customer number
             $table->string('creditor_name'); // Creditor name
             $table->text('address')->nullable(); // Address (optional)
