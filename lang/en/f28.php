@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 return [
     'Basic_Notes' => 'Basic Notes',
+    'Payment_Analysis' => 'Payment Analysis',
+
     'bank_code' =>  'Bank Code',
     'bank_name' =>  'Bank Name',
     'bank_account' =>  'Bank Account',
@@ -57,4 +59,7 @@ return [
     'year'  =>  'Year',
     'month'  =>  'Month',
     'creditors_number_placeholder' =>  'Auto-generated after saving',
+
+    'analysis_number'   =>  'Analysis Number',
+    'payment_analysis'   =>   'Payment Analysis',
 ];

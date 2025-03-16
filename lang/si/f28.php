@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 return [
     'Basic_Notes'   =>  'මූලික සටහන්',
+    'Payment_Analysis' => 'ගෙවීම් විග්‍රහය',
+
+
     'bank_code' =>  'බැංකු කේතය',
     'bank_name' =>  'බැංකුවේ නම',
     'bank_account' =>  'බැංකු ගිණුම',
@@ -58,4 +61,6 @@ return [
     'month'  =>  'මාසය',
     'creditors_number_placeholder' =>  'සුරැකීමෙන් පසු ස්වයංක්‍රීයව ජනනය වේ',
 
+    'analysis_number'   =>  'විග්‍රහ අංකය',
+    'payment_analysis'   =>   'ගෙවීම් විග්‍රහය',
 ];

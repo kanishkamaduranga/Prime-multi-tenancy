@@ -1,0 +1,76 @@
+<?php
+
+namespace App\Filament\Resources;
+
+use App\Filament\Resources\PaymentAnalysisResource\Pages;
+use App\Filament\Resources\PaymentAnalysisResource\RelationManagers;
+use App\Models\PaymentAnalysis;
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\TextColumn;
+
+class PaymentAnalysisResource extends Resource
+{
+    protected static ?string $model = PaymentAnalysis::class;
+
+    protected static ?string $navigationGroup = 'Basic Notes';
+
+    protected static ?string $navigationIcon = 'heroicon-o-bars-arrow-down';
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\TextInput::make('analysis_number')
+                    ->label(__('f28.analysis_number'))
+                    ->required()
+                    ->maxLength(20),
+                Forms\Components\TextInput::make('payment_analysis')
+                    ->label(__('f28.payment_analysis'))
+                    ->required(),
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('analysis_number')->label(__('f28.analysis_number'))->sortable()->searchable(),
+                TextColumn::make('payment_analysis')->label(__('f28.payment_analysis'))->sortable()->searchable(),
+                TextColumn::make('created_at')->label('Created At')->dateTime(),
+                TextColumn::make('updated_at')->label('Updated At')->dateTime(),
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\ViewAction::make()->modal(),
+                Tables\Actions\EditAction::make()->modal(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListPaymentAnalyses::route('/'),
+        ];
+    }
+}
