@@ -10,6 +10,7 @@ return [
     'Debtors_consumers'   => 'Debtors (consumers)',
     'Vehicles' => 'Vehicles',
     'Employee_information' => 'Employee information',
+    'Vehicles_rented' => 'Vehicles rented on a rental basis',
 
     'bank_code' =>  'Bank Code',
     'bank_name' =>  'Bank Name',
@@ -86,5 +87,7 @@ return [
     'etf_number'    =>  'ETF Number',
     'employee_type' =>  'Employee Type',
     'cashier' =>  'Cashier',
+
+    'payment_method'     =>  'Payment Method',
 
 ];

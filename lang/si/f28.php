@@ -10,6 +10,7 @@ return [
     'Debtors_consumers'   => 'ණය ගැතියන් (පරිභෝගිකයන්)',
     'Vehicles' => 'රථ වාහන',
     'Employee_information' => 'සේවක තොරතුරු',
+    'Vehicles_rented' => 'කුලී පදනමට ගත් වාහන',
 
 
     'bank_code' =>  'බැංකු කේතය',
