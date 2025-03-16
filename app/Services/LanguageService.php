@@ -11,7 +11,7 @@ class LanguageService
      *
      * @return string
      */
-    public function getLocale()
+    public static function getLocale()
     {
         $locale = 'si';
         if (Session::has('locale')){
