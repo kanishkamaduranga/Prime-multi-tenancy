@@ -56,4 +56,5 @@ return [
     'price' =>  'Price',
     'year'  =>  'Year',
     'month'  =>  'Month',
+    'creditors_number_placeholder' =>  'Auto-generated after saving',
 ];

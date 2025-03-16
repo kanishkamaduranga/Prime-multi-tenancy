@@ -56,5 +56,6 @@ return [
     'price' =>  'මිල',
     'year'  =>  'වර්ෂය',
     'month'  =>  'මාසය',
+    'creditors_number_placeholder' =>  'සුරැකීමෙන් පසු ස්වයංක්‍රීයව ජනනය වේ',
 
 ];

@@ -27,9 +27,10 @@ class CreditorResource extends Resource
             ->schema([
                 // Auto-generated creditors number (read-only)
                 Forms\Components\TextInput::make('creditors_number')
-                    ->default('SUPH' . str_pad(Creditor::max('id') + 1, 8, '0', STR_PAD_LEFT)) // Auto-generate default value
+                    //->default('SUPH' . str_pad(Creditor::max('id') + 1, 8, '0', STR_PAD_LEFT)) // Auto-generate default value
                     ->disabled() // Make it read-only
-                    ->label(__('f28.creditors_number')),
+                    ->label(__('f28.creditors_number'))
+                    ->placeholder(__('f28.creditors_number_placeholder')),
 
                 Forms\Components\TextInput::make('customer_number')
                     ->required()
