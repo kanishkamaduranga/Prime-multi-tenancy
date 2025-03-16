@@ -6,6 +6,8 @@ return [
     'Basic_Notes'   =>  'මූලික සටහන්',
     'Payment_Analysis' => 'ගෙවීම් විග්‍රහය',
     'Managers' => 'කළමණාකරුවන්',
+    'Debtors'   => 'ණය ගැතියන්',
+    'Debtors_consumers'   => 'ණය ගැතියන් (පරිභෝගිකයන්)',
 
 
     'bank_code' =>  'බැංකු කේතය',
@@ -64,4 +66,11 @@ return [
 
     'analysis_number'   =>  'විග්‍රහ අංකය',
     'payment_analysis'   =>   'ගෙවීම් විග්‍රහය',
+
+    'debtor_number' =>  'ණයගැතියන්ගේ අංකය',
+    'debtor_number_placeholder' =>  'සුරැකීමෙන් පසු ස්වයංක්‍රීයව ජනනය වේ',
+    'debtor_name' =>    'ණයගැතියන්ගේ නම',
+    'saved_amount' => 'තැම්පත් කෙරු මුදල',
+    'date' =>  'දිනය',
+
 ];

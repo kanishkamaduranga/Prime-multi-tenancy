@@ -6,6 +6,8 @@ return [
     'Basic_Notes' => 'Basic Notes',
     'Payment_Analysis' => 'Payment Analysis',
     'Managers'  => 'Managers',
+    'Debtors'   => 'Debtors',
+    'Debtors_consumers'   => 'Debtors (consumers)',
 
     'bank_code' =>  'Bank Code',
     'bank_name' =>  'Bank Name',
@@ -65,4 +67,11 @@ return [
     'payment_analysis'   =>   'Payment Analysis',
 
     'manager_number_placeholder' =>  'Auto-generated after saving',
+
+    'debtor_number' =>  'Debtors Number',
+    'debtor_number_placeholder' =>  'Auto-generated after saving',
+    'debtor_name' =>    'Debtors Name',
+    'saved_amount' => 'Saved Amount',
+    'date' =>  'Date',
+
 ];
