@@ -9,6 +9,7 @@ return [
     'Debtors'   => 'Debtors',
     'Debtors_consumers'   => 'Debtors (consumers)',
     'Vehicles' => 'Vehicles',
+    'Employee_information' => 'Employee information',
 
     'bank_code' =>  'Bank Code',
     'bank_name' =>  'Bank Name',
@@ -79,5 +80,11 @@ return [
     'fuel_quality_level'    =>  'Fuel Quality Level',
     'fuel_type' =>  'Fuel Type',
 
+    'employee_number'   =>  'Employee Number',
+    'employee_name'   =>  'Employee Name',
+    'date_of_birth' =>  'Date Of Birth',
+    'etf_number'    =>  'ETF Number',
+    'employee_type' =>  'Employee Type',
+    'cashier' =>  'Cashier',
 
 ];

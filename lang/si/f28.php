@@ -9,6 +9,7 @@ return [
     'Debtors'   => 'ණය ගැතියන්',
     'Debtors_consumers'   => 'ණය ගැතියන් (පරිභෝගිකයන්)',
     'Vehicles' => 'රථ වාහන',
+    'Employee_information' => 'සේවක තොරතුරු',
 
 
     'bank_code' =>  'බැංකු කේතය',
@@ -77,5 +78,12 @@ return [
     'vehicle_number' =>  'වාහන අංකය',
     'fuel_quality_level'    =>  'ඉන්ධන තත්ත්ව මට්ටම',
     'fuel_type' =>  'ඉන්ධන වර්ගය',
+
+    'employee_number'   =>  'සේවක අංකය',
+    'employee_name'   =>  'සේවකයාගේ නම',
+    'date_of_birth' =>  'උපන් දිනය',
+    'etf_number'    =>  'ETF අංකය',
+    'employee_type' =>  'සේවක වර්ගය',
+    'cashier' =>  'මුදල් අයකැමි',
 
 ];
