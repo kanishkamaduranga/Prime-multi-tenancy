@@ -5,6 +5,7 @@ declare(strict_types=1);
 return [
     'Basic_Notes'   =>  'මූලික සටහන්',
     'Payment_Analysis' => 'ගෙවීම් විග්‍රහය',
+    'Managers' => 'කළමණාකරුවන්',
 
 
     'bank_code' =>  'බැංකු කේතය',

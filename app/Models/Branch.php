@@ -31,4 +31,12 @@ class Branch extends Model
     {
         return $this->belongsTo(BranchType::class);
     }
+
+    // Many-to-Many Relationship to Managers
+    public function managers(): BelongsToMany
+    {
+        return $this->belongsToMany(Manager::class, 'branch_manager')
+            ->using(BranchManager::class)
+            ->withTimestamps();
+    }
 }
