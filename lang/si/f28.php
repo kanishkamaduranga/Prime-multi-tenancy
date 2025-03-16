@@ -38,4 +38,10 @@ return [
     'journal'     =>  'ජර්නලය',
 
     'basic_ledger'  =>  'මූලික ලෙජරය',
+    'control_account_name' =>  'පාලන ගිණුමේ නම',
+
+    'ledger_name' =>  'ලෙජරයේ නම',
+    'ledger_number' =>  'ලෙජරයේ අංකය',
+    'f8_number' =>  'F8 අංකය',
+
 ];

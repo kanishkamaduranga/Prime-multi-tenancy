@@ -38,4 +38,9 @@ return [
     'journal'     =>  'Journal',
 
     'basic_ledger'  =>  'Basic Ledger',
+    'control_account_name' =>  'Control Account Name',
+
+    'ledger_name' =>  'Ledger Name',
+    'ledger_number' =>  'Ledger Number',
+    'f8_number' =>  'F8 Number',
 ];
