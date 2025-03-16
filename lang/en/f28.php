@@ -51,5 +51,9 @@ return [
     'bank_account_number' => 'Bank Account Number',
     'bank_account_special_message' =>  'Bank Account Special Message',
 
-
+    'creditors_number' =>  'Creditors Number',
+    'creditor_name' =>  'Creditor Name',
+    'price' =>  'Price',
+    'year'  =>  'Year',
+    'month'  =>  'Month',
 ];
