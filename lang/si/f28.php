@@ -8,6 +8,7 @@ return [
     'Managers' => 'කළමණාකරුවන්',
     'Debtors'   => 'ණය ගැතියන්',
     'Debtors_consumers'   => 'ණය ගැතියන් (පරිභෝගිකයන්)',
+    'Vehicles' => 'රථ වාහන',
 
 
     'bank_code' =>  'බැංකු කේතය',

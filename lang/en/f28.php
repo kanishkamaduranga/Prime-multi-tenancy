@@ -8,6 +8,7 @@ return [
     'Managers'  => 'Managers',
     'Debtors'   => 'Debtors',
     'Debtors_consumers'   => 'Debtors (consumers)',
+    'Vehicles' => 'Vehicles',
 
     'bank_code' =>  'Bank Code',
     'bank_name' =>  'Bank Name',
@@ -73,5 +74,10 @@ return [
     'debtor_name' =>    'Debtors Name',
     'saved_amount' => 'Saved Amount',
     'date' =>  'Date',
+
+    'vehicle_number' =>  'Vehicle Number',
+    'fuel_quality_level'    =>  'Fuel Quality Level',
+    'fuel_type' =>  'Fuel Type',
+
 
 ];
