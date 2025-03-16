@@ -74,4 +74,8 @@ return [
     'saved_amount' => 'තැම්පත් කෙරු මුදල',
     'date' =>  'දිනය',
 
+    'vehicle_number' =>  'වාහන අංකය',
+    'fuel_quality_level'    =>  'ඉන්ධන තත්ත්ව මට්ටම',
+    'fuel_type' =>  'ඉන්ධන වර්ගය',
+
 ];

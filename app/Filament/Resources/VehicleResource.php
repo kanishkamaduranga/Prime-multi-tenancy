@@ -78,7 +78,13 @@ class VehicleResource extends Resource
                 TextColumn::make('department.department')->label(__('f28.department'))->sortable()->searchable(),
                 TextColumn::make('vehicle_number')->label(__('f28.vehicle_number'))->sortable()->searchable(),
                 TextColumn::make('fuel_quality_level')->label(__('f28.fuel_quality_level'))->sortable()->searchable(),
-                TextColumn::make('fuel_type')->label(__('f28.fuel_type'))->sortable()->searchable(),
+                TextColumn::make('fuel_type')
+                    ->formatStateUsing(function ($state) {
+                        // Fetch the label for the stored value from ImportantParameter
+                        $vehicle = ImportantParameterHelper::getValues('fuel_types');
+                        return $vehicle[$state] ?? $state; // Return the label or the raw value if not found
+                    })
+                    ->label(__('f28.fuel_type'))->sortable()->searchable(),
             ])
             ->filters([
                 //
