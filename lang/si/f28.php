@@ -44,4 +44,13 @@ return [
     'ledger_number' =>  'ලෙජරයේ අංකය',
     'f8_number' =>  'F8 අංකය',
 
+    'debit_or_credit'   =>  'හර බැර',
+    'start_balance' =>  'ආරම්භක ශේෂය',
+    'balance_start_date' =>  'ශේෂ ආරම්භක දිනය',
+    'bank_account_name' =>  'බැංකු ගිණුමේ නම',
+    'bank_account_number' => 'බැංකු ගිණුම් අංකය',
+    'bank_account_special_message' =>  'සැලකිය යුතුයි ... පළමුව "නව ලේජරය" යටතේ ඉහත සදහන් ගිණුමට ......................................... ',
+
+
+
 ];

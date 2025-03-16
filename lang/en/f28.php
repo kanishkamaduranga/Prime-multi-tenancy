@@ -43,4 +43,13 @@ return [
     'ledger_name' =>  'Ledger Name',
     'ledger_number' =>  'Ledger Number',
     'f8_number' =>  'F8 Number',
+
+    'debit_or_credit'   =>  'Debit or Credit',
+    'start_balance' =>  'Start Balance',
+    'balance_start_date' =>  'Balance Start Date',
+    'bank_account_name' =>  'Bank Account Name',
+    'bank_account_number' => 'Bank Account Number',
+    'bank_account_special_message' =>  'Bank Account Special Message',
+
+
 ];
