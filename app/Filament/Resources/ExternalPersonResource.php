@@ -20,6 +20,21 @@ class ExternalPersonResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-hand-raised';
     protected static ?string $navigationGroup = 'Basic Notes';
 
+    public static function getModelLabel(): string
+    {
+        return trans('f28.external_person');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('f28.external_person');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return trans('f28.external_person');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

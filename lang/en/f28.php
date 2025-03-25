@@ -11,6 +11,14 @@ return [
     'Vehicles' => 'Vehicles',
     'Employee_information' => 'Employee information',
     'Vehicles_rented' => 'Vehicles rented on a rental basis',
+    'Bank' => 'Bank',
+    'Bank_account' => 'Bank account',
+    'Creditor' => 'Creditor',
+    'Creditor_supplier' => 'Creditor (Supplier)',
+    'Departments' => 'Departments',
+    'Branch' => 'Branch',
+    'Branch_type' => 'Branch type',
+    'Ledger' => 'Ledger',
 
     'bank_code' =>  'Bank Code',
     'bank_name' =>  'Bank Name',
@@ -24,6 +32,7 @@ return [
     'branch_code'   =>  'Branch Code',
     'branch_name'   =>  'Branch Name',
 
+    'external_person' =>  'External person',
     'external_person_number' => 'External Person Number',
     'customer_number' => 'Customer Number',
     'name' => 'Name',
@@ -46,6 +55,7 @@ return [
     'journal'     =>  'Journal',
 
     'basic_ledger'  =>  'Basic Ledger',
+    'control_account' =>  'Control Account',
     'control_account_name' =>  'Control Account Name',
 
     'ledger_name' =>  'Ledger Name',
@@ -89,5 +99,10 @@ return [
     'cashier' =>  'Cashier',
 
     'payment_method'     =>  'Payment Method',
+
+    'manager_number' =>  'Manager Number',
+    'manager_name'  =>  'Manager Name',
+
+    'status' =>  'Status',
 
 ];

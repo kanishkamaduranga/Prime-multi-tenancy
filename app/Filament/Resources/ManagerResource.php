@@ -23,52 +23,67 @@ class ManagerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-8-tooth';
 
+    public static function getModelLabel(): string
+    {
+        return trans('f28.Managers');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('f28.Managers');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return trans('f28.Managers');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 // Manager Number (auto-generated, hidden from user input)
                 Forms\Components\TextInput::make('manager_number')
-                    ->label('Manager Number')
+                    ->label(__('f28.manager_number'))
                     ->disabled()
                     ->placeholder(__('f28.manager_number_placeholder')),
 
                 // Manager Name
                 Forms\Components\TextInput::make('manager_name')
-                    ->label('Manager Name')
+                    ->label(__('f28.manager_name'))
                     ->required(),
 
                 // Control Account (FK to control_accounts)
                 Forms\Components\Select::make('control_account_id')
-                    ->label('Control Account')
+                    ->label(__('f28.control_account'))
                     ->relationship('controlAccount', 'account_name') // Assuming 'name' is a field in control_accounts
                    // ->searchable()
                     ->required(),
 
                 // Department (FK to departments)
                 Forms\Components\Select::make('department_id')
-                    ->label('Department')
+                    ->label(__('f28.department'))
                     ->relationship('department', 'department') // Assuming 'name' is a field in departments
                     //->searchable()
                     ->required(),
 
                 // Branch Type (FK to branch_types)
                 Forms\Components\Select::make('branch_type_id')
-                    ->label('Branch Type')
+                    ->label(__('f28.branch_type'))
                     ->relationship('branchType', 'branch_type_name') // Assuming 'name' is a field in branch_types
                    // ->searchable()
                     ->required(),
 
                 // Branches (Many-to-Many with branches)
                 Forms\Components\Select::make('branches')
-                    ->label('Branches')
+                    ->label(__('f28.Branch'))
                     ->relationship('branches', 'branch_name') // Assuming 'name' is a field in branches
                     ->multiple()
                     ->searchable()
                     ->preload(),
 
                 Forms\Components\Select::make('status')
-                    ->label('Status')
+                    ->label(__('f28.status'))
                     ->options([
                         'active' => 'Active',
                         'inactive' => 'Inactive',
@@ -83,13 +98,13 @@ class ManagerResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('manager_number')->label('Manager Number')->sortable()->searchable(),
-                TextColumn::make('manager_name')->label('Manager Name')->sortable()->searchable(),
-                TextColumn::make('controlAccount.account_name')->label('Control Account')->sortable()->searchable(),
-                TextColumn::make('department.department')->label('Department')->sortable()->searchable(),
-                TextColumn::make('branchType.branch_type_name')->label('Branch Type')->sortable()->searchable(),
+                TextColumn::make('manager_number')->label(__('f28.manager_number'))->sortable()->searchable(),
+                TextColumn::make('manager_name')->label(__('f28.manager_name'))->sortable()->searchable(),
+                TextColumn::make('controlAccount.account_name')->label(__('f28.control_account'))->sortable()->searchable(),
+                TextColumn::make('department.department')->label(__('f28.department'))->sortable()->searchable(),
+                TextColumn::make('branchType.branch_type_name')->label(__('f28.branch_type'))->sortable()->searchable(),
                // TextColumn::make('branches.branch_name')->label('Branches')->sortable()->searchable(),
-                TextColumn::make('status')->label('Status')->sortable()->searchable(),
+                TextColumn::make('status')->label(__('f28.status'))->sortable()->searchable(),
             ])
             ->filters([
                 //
