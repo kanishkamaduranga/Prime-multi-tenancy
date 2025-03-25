@@ -22,6 +22,21 @@ class PaymentAnalysisResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-bars-arrow-down';
 
+    public static function getModelLabel(): string
+    {
+        return trans('f28.payment_analysis');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('f28.payment_analysis');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return trans('f28.payment_analysis');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

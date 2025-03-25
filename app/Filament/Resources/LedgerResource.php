@@ -22,6 +22,21 @@ class LedgerResource extends Resource
 
     protected static ?string $navigationGroup = 'Basic Notes';
 
+    public static function getModelLabel(): string
+    {
+        return trans('f28.Ledger');
+    }
+
+    public static function getNavigationLabeLedger(): string
+    {
+        return trans('f28.Ledger');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return trans('f28.Ledger');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

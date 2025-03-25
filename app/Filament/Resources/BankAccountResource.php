@@ -22,6 +22,21 @@ class BankAccountResource extends Resource
 
     protected static ?string $navigationGroup = 'Basic Notes';
 
+    public static function getModelLabel(): string
+    {
+        return trans('f28.Bank_account');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('f28.Bank_account');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return trans('f28.Bank_account');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

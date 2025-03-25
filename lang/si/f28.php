@@ -11,7 +11,14 @@ return [
     'Vehicles' => 'රථ වාහන',
     'Employee_information' => 'සේවක තොරතුරු',
     'Vehicles_rented' => 'කුලී පදනමට ගත් වාහන',
-
+    'Bank' => 'බැංකු',
+    'Bank_account' => 'බැංකු ගිණුම්',
+    'Creditor' => 'ණය හිමියන්',
+    'Creditor_supplier' => 'ණය හිමියන් (සැපයුම්කරුවන්)',
+    'Departments' => 'අංශය',
+    'Branch' => 'ශාඛා',
+    'Branch_type' => 'ශාඛා වර්ග',
+    'Ledger' => 'ලෙජර',
 
     'bank_code' =>  'බැංකු කේතය',
     'bank_name' =>  'බැංකුවේ නම',
@@ -25,7 +32,8 @@ return [
     'branch_code'   =>  'ශාඛා අංකය',
     'branch_name'   =>  'ශාඛාවේ නම',
 
-    'external_person_number' => 'බාහිර පුද්ගල අංකය',
+    'external_person' => 'භාහිර පුද්ගලයන්',
+    'external_person_number' => 'භාහිර පුද්ගල අංකය',
     'customer_number' => 'පාරිභෝගික අංකය',
     'name' => 'නම',
     'address'   => 'ලිපිනය',
@@ -47,6 +55,7 @@ return [
     'journal'     =>  'ජර්නලය',
 
     'basic_ledger'  =>  'මූලික ලෙජරය',
+    'control_account' => 'පාලන ගිණුම් ',
     'control_account_name' =>  'පාලන ගිණුමේ නම',
 
     'ledger_name' =>  'ලෙජරයේ නම',
@@ -86,5 +95,12 @@ return [
     'etf_number'    =>  'ETF අංකය',
     'employee_type' =>  'සේවක වර්ගය',
     'cashier' =>  'මුදල් අයකැමි',
+
+    'payment_method'     =>  'ගෙවීම් ක්රමය',
+
+    'manager_number' =>  'කළමනාකරු අංකය',
+    'manager_name'  =>  'කළමනාකරු නම',
+
+    'status'    => 'Status',
 
 ];
