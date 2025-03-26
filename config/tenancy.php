@@ -18,6 +18,8 @@ return [
      */
     'central_domains' => [
         'f28.local',
+        'localhost',
+        
     ],
 
     /**
