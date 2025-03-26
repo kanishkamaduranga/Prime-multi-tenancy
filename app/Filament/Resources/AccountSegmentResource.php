@@ -21,6 +21,21 @@ class AccountSegmentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-currency-pound';
 
+    public static function getModelLabel(): string
+    {
+        return trans('f28.account_segments');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('f28.account_segments');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return trans('f28.account_segments');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

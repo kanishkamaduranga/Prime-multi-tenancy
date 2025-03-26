@@ -20,6 +20,21 @@ class BranchResource extends Resource
     protected static ?string $navigationGroup = 'Basic Notes'; // Group under "Basic Notes"
     protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
 
+    public static function getModelLabel(): string
+    {
+        return trans('f28.Branch');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('f28.Branch');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return trans('f28.Branch');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

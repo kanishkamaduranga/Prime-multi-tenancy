@@ -21,16 +21,31 @@ class DeratmentResource extends Resource
     protected static ?string $navigationLabel = 'Departments'; // Sub-link label
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getModelLabel(): string
+    {
+        return trans('f28.Departments');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('f28.Departments');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return trans('f28.Departments');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('department_code')
-                    ->label('Department Code')
+                    ->label(__('f28.department_code'))
                     ->required()
                     ->maxLength(50),
                 Forms\Components\TextInput::make('department')
-                    ->label('Department')
+                    ->label(__('f28.department'))
                     ->required()
                     ->maxLength(255),
             ]);
@@ -41,10 +56,10 @@ class DeratmentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('department_code')
-                    ->label('Department Code')
+                    ->label(__('f28.department_code'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('department')
-                    ->label('Department')
+                    ->label(__('f28.department'))
                     ->searchable(),
             ])
             ->filters([

@@ -22,6 +22,21 @@ class SubAccountSegmentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-currency-rupee';
 
+    public static function getModelLabel(): string
+    {
+        return trans('f28.sub_account_segments');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('f28.sub_account_segments');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return trans('f28.sub_account_segments');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
