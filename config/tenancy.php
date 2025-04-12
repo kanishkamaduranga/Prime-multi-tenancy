@@ -19,7 +19,8 @@ return [
     'central_domains' => [
         'f28.local',
         'localhost',
-        
+        'f28-prime.xyz'
+
     ],
 
     /**
