@@ -103,4 +103,10 @@ return [
 
     'status'    => 'Status',
 
+    'configuration_type' =>  'Configuration Type',
+    'configuration_form_ledger' =>  'Configuration Form Ledger',
+    'debit' =>  'හර',
+    'credit' =>  'බැර',
+
+    'User' =>  'පරිශීලක',
 ];
