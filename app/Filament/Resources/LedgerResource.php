@@ -97,7 +97,6 @@ class LedgerResource extends Resource
                             ->where('sub_account_segment_id', $get('sub_account_segment_id'))
                             ->pluck('account_name', 'id');
                     })
-                    ->required()
                     ->label(__('f28.control_account_name')),
 
                 Forms\Components\CheckboxList::make('basic_ledger')
