@@ -16,7 +16,7 @@ use Filament\Tables\Columns\TextColumn;
 class DebtorResource extends Resource
 {
     protected static ?string $model = Debtor::class;
-    protected static ?string $navigationGroup = 'Basic Notes';
+    protected static ?string $navigationGroup = 'basic_notes';
     protected static ?int $navigationSort = 17;
 
 

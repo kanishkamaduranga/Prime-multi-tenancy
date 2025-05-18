@@ -28,6 +28,10 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        $groups = [
+            'basic_notes' => trans('f28.Basic_Notes'),
+        ];
+
         return $panel
             ->default()
             ->id('admin')
@@ -41,6 +45,7 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
+            ->navigationGroups($groups)
             ->resources([
 
             ])

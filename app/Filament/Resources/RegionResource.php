@@ -17,7 +17,7 @@ class RegionResource extends Resource
 {
     protected static ?string $model = Region::class;
 
-    protected static ?string $navigationGroup = 'Basic Notes'; // Group under "Basic Notes"
+    protected static ?string $navigationGroup = 'basic_notes'; // Group under "basic_notes"
     protected static ?string $navigationLabel = 'Regions'; // Sub-link label
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

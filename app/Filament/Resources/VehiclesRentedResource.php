@@ -21,7 +21,7 @@ class VehiclesRentedResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-truck';
 
-    protected static ?string $navigationGroup = 'Basic Notes';
+    protected static ?string $navigationGroup = 'basic_notes';
 
     protected static ?int $navigationSort = 22;
 

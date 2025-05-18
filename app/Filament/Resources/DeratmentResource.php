@@ -17,7 +17,7 @@ class DeratmentResource extends Resource
 {
     protected static ?string $model = Department::class;
 
-    protected static ?string $navigationGroup = 'Basic Notes'; // Group under "Basic Notes"
+    protected static ?string $navigationGroup = 'basic_notes'; // Group under "basic_notes"
     protected static ?string $navigationLabel = 'Departments'; // Sub-link label
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

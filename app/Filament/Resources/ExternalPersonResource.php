@@ -18,7 +18,7 @@ class ExternalPersonResource extends Resource
     protected static ?string $model = ExternalPerson::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-hand-raised';
-    protected static ?string $navigationGroup = 'Basic Notes';
+    protected static ?string $navigationGroup = 'basic_notes';
 
     protected static ?int $navigationSort = 21;
 

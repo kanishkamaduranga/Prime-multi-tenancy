@@ -17,7 +17,7 @@ use App\Helpers\ImportantParameterHelper;
 class AccountSegmentResource extends Resource
 {
     protected static ?string $model = AccountSegment::class;
-    protected static ?string $navigationGroup = 'Basic Notes';
+    protected static ?string $navigationGroup = 'basic_notes';
 
     protected static ?string $navigationIcon = 'heroicon-o-document-currency-pound';
     protected static ?int $navigationSort = 8;
