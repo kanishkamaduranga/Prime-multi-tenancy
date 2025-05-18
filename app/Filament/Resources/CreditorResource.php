@@ -19,7 +19,9 @@ class CreditorResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    protected static ?string $navigationGroup = 'Basic Notes';
+    protected static ?string $navigationGroup = 'basic_notes';
+
+    protected static ?int $navigationSort = 3;
 
     public static function getModelLabel(): string
     {

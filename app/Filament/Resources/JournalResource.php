@@ -16,8 +16,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class JournalResource extends Resource
 {
     protected static ?string $model = Journal::class;
-    protected static ?string $navigationGroup = 'Basic Notes';
+    protected static ?string $navigationGroup = 'basic_notes';
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
+
+    protected static ?int $navigationSort = 13;
 
     public static function getModelLabel(): string
     {

@@ -18,9 +18,11 @@ class PaymentAnalysisResource extends Resource
 {
     protected static ?string $model = PaymentAnalysis::class;
 
-    protected static ?string $navigationGroup = 'Basic Notes';
+    protected static ?string $navigationGroup = 'basic_notes';
 
     protected static ?string $navigationIcon = 'heroicon-o-bars-arrow-down';
+
+    protected static ?int $navigationSort = 14;
 
     public static function getModelLabel(): string
     {

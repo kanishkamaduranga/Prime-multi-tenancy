@@ -17,8 +17,10 @@ class BankResource extends Resource
 {
     protected static ?string $model = Bank::class;
 
-    protected static ?string $navigationGroup = 'Basic Notes'; // Group under "Basic Notes"
+    protected static ?string $navigationGroup = 'basic_notes'; // Group under "basic_notes"
     protected static ?string $navigationIcon = 'heroicon-o-banknotes'; // Icon for the resource
+
+    protected static ?int $navigationSort = 1;
 
     public static function getModelLabel(): string
     {

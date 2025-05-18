@@ -23,7 +23,10 @@ class EmployeeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 
-    protected static ?string $navigationGroup = 'Basic Notes';
+    protected static ?string $navigationGroup = 'basic_notes';
+
+    protected static ?int $navigationSort = 20;
+
     public static function getModelLabel(): string
     {
         return trans('f28.Employee_information');

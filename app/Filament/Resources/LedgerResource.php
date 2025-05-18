@@ -20,7 +20,8 @@ class LedgerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
-    protected static ?string $navigationGroup = 'Basic Notes';
+    protected static ?string $navigationGroup = 'basic_notes';
+    protected static ?int $navigationSort = 10;
 
     public static function getModelLabel(): string
     {
@@ -97,7 +98,6 @@ class LedgerResource extends Resource
                             ->where('sub_account_segment_id', $get('sub_account_segment_id'))
                             ->pluck('account_name', 'id');
                     })
-                    ->required()
                     ->label(__('f28.control_account_name')),
 
                 Forms\Components\CheckboxList::make('basic_ledger')

@@ -17,8 +17,10 @@ class BranchResource extends Resource
 {
     protected static ?string $model = Branch::class;
 
-    protected static ?string $navigationGroup = 'Basic Notes'; // Group under "Basic Notes"
+    protected static ?string $navigationGroup = 'basic_notes'; // Group under "basic_notes"
     protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
+
+    protected static ?int $navigationSort = 7;
 
     public static function getModelLabel(): string
     {
