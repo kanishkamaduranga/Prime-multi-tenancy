@@ -84,6 +84,11 @@ class ConfigurationFormLedgerResource extends Resource
                 Tables\Columns\TextColumn::make('configuration_type')
                     ->label(__('f28.configuration_type'))
                     ->searchable()
+                    ->formatStateUsing(function ($state) {
+                        // Fetch the label for the stored value from ImportantParameterHelper
+                        $configuration_forms_ledgers = ImportantParameterHelper::getValues('configuration_forms_ledgers');
+                        return $configuration_forms_ledgers[$state] ?? $state; // Return the label or the raw value if not found
+                    })
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('department.department')
