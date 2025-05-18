@@ -23,6 +23,8 @@ class ManagerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-8-tooth';
 
+    protected static ?int $navigationSort = 15;
+
     public static function getModelLabel(): string
     {
         return trans('f28.Managers');

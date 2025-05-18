@@ -21,6 +21,7 @@ class BankAccountResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
     protected static ?string $navigationGroup = 'Basic Notes';
+    protected static ?int $navigationSort = 2;
 
     public static function getModelLabel(): string
     {

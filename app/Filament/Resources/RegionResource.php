@@ -21,6 +21,8 @@ class RegionResource extends Resource
     protected static ?string $navigationLabel = 'Regions'; // Sub-link label
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?int $navigationSort = 5;
+
     public static function getModelLabel(): string
     {
         return trans('f28.region');

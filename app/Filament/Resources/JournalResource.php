@@ -19,6 +19,8 @@ class JournalResource extends Resource
     protected static ?string $navigationGroup = 'Basic Notes';
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
+    protected static ?int $navigationSort = 13;
+
     public static function getModelLabel(): string
     {
         return trans('f28.journal');

@@ -21,6 +21,7 @@ class LedgerResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     protected static ?string $navigationGroup = 'Basic Notes';
+    protected static ?int $navigationSort = 10;
 
     public static function getModelLabel(): string
     {

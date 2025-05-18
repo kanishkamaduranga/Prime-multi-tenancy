@@ -19,6 +19,7 @@ class BranchTypeResource extends Resource
 
     protected static ?string $navigationGroup = 'Basic Notes'; // Group under "Basic Notes"
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
+    protected static ?int $navigationSort = 6;
 
     public static function getModelLabel(): string
     {

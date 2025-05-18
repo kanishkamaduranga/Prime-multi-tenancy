@@ -20,6 +20,7 @@ class AccountSegmentResource extends Resource
     protected static ?string $navigationGroup = 'Basic Notes';
 
     protected static ?string $navigationIcon = 'heroicon-o-document-currency-pound';
+    protected static ?int $navigationSort = 8;
 
     public static function getModelLabel(): string
     {

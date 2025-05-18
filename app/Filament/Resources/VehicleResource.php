@@ -23,6 +23,8 @@ class VehicleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-truck';
 
+    protected static ?int $navigationSort = 19;
+
     public static function getModelLabel(): string
     {
         return trans('f28.Vehicles');

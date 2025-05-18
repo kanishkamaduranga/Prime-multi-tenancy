@@ -17,6 +17,7 @@ class DebtorResource extends Resource
 {
     protected static ?string $model = Debtor::class;
     protected static ?string $navigationGroup = 'Basic Notes';
+    protected static ?int $navigationSort = 17;
 
 
     public static function getModelLabel(): string

@@ -21,6 +21,8 @@ class DeratmentResource extends Resource
     protected static ?string $navigationLabel = 'Departments'; // Sub-link label
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?int $navigationSort = 4;
+
     public static function getModelLabel(): string
     {
         return trans('f28.Departments');

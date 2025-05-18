@@ -20,6 +20,8 @@ class BankResource extends Resource
     protected static ?string $navigationGroup = 'Basic Notes'; // Group under "Basic Notes"
     protected static ?string $navigationIcon = 'heroicon-o-banknotes'; // Icon for the resource
 
+    protected static ?int $navigationSort = 1;
+
     public static function getModelLabel(): string
     {
         return trans('f28.Bank');
