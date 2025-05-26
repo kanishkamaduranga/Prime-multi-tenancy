@@ -53,7 +53,7 @@ class LedgerResource extends Resource
                     ->options(ImportantParameterHelper::getValues('basic_accounts')) // Fetch options from ImportantParameterHelper
                     ->required()
                     ->live() // Enable live updates
-                    ->label(__('f28.bank_account'))
+                    ->label(__('f28.basic_accounts'))
                     ->afterStateUpdated(fn (Forms\Set $set) => $set('account_segment_id', null)), // Reset account segment when basic account changes
 
                 Forms\Components\Select::make('account_segment_id')
