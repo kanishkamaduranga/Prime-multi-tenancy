@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CreditorResource\Pages;
 use App\Filament\Resources\CreditorResource\RelationManagers;
 use App\Models\Creditor;
+use App\Models\LedgerController;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -69,11 +70,17 @@ class CreditorResource extends Resource
                     ->maxLength(20)
                     ->label(__('f28.telephone_number')),
 
+
                 Forms\Components\Select::make('control_account_id')
-                    ->relationship('controlAccount', 'account_name') // Assuming 'account_name' is a field in the control_accounts table
-                    ->required()
-                   // ->searchable() // Enable search for dropdown
-                    ->label(__('f28.control_account_name')),
+                    ->label(__('f28.control_account_name'))
+                    ->options(function () {
+                        return LedgerController::where('type', 'control_account')
+                            ->selectRaw("id, CONCAT(number, ' - ', name) as account_full")
+                            ->pluck('account_full', 'id');
+                    })
+                    ->searchable()
+                    ->required(),
+
 
                 Forms\Components\TextInput::make('price')
                     ->required()
@@ -122,8 +129,11 @@ class CreditorResource extends Resource
                     ->label(__('f28.telephone_number'))
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('controlAccount.account_name')
+                Tables\Columns\TextColumn::make('controlAccount.name')
                     ->label(__('f28.control_account_name'))
+                    ->formatStateUsing(fn ($state, $record) =>
+                        $record->controlAccount->number . ' - ' . $state
+                    )
                     ->sortable()
                     ->searchable(),
 
