@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LedgerResource\Pages;
 use App\Filament\Resources\LedgerResource\RelationManagers;
-use App\Models\Ledger;
+use App\Models\LedgerController;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,7 +16,7 @@ use App\Helpers\ImportantParameterHelper;
 
 class LedgerResource extends Resource
 {
-    protected static ?string $model = Ledger::class;
+    protected static ?string $model = LedgerController::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
@@ -28,7 +28,7 @@ class LedgerResource extends Resource
         return trans('f28.Ledger');
     }
 
-    public static function getNavigationLabeLedger(): string
+    public static function getNavigationLabel(): string
     {
         return trans('f28.Ledger');
     }
@@ -38,40 +38,43 @@ class LedgerResource extends Resource
         return trans('f28.Ledger');
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('type', 'ledger');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('department_id')
-                    ->relationship('department', 'department') // Assuming 'name' is a field in the departments table
+                    ->relationship('department', 'department')
                     ->required()
-                    ->live() // Enable live updates
+                    ->live()
                     ->label(__('f28.department'))
-                    ->afterStateUpdated(fn (Forms\Set $set) => $set('account_segment_id', null)), // Reset account segment when department changes
+                    ->afterStateUpdated(fn (Forms\Set $set) => $set('account_segment_id', null)),
 
                 Forms\Components\Select::make('basic_account')
-                    ->options(ImportantParameterHelper::getValues('basic_accounts')) // Fetch options from ImportantParameterHelper
+                    ->options(ImportantParameterHelper::getValues('basic_accounts'))
                     ->required()
-                    ->live() // Enable live updates
+                    ->live()
                     ->label(__('f28.basic_accounts'))
-                    ->afterStateUpdated(fn (Forms\Set $set) => $set('account_segment_id', null)), // Reset account segment when basic account changes
+                    ->afterStateUpdated(fn (Forms\Set $set) => $set('account_segment_id', null)),
 
                 Forms\Components\Select::make('account_segment_id')
                     ->options(function (Forms\Get $get) {
-                        // Load account segments filtered by department and basic account
                         return \App\Models\AccountSegment::query()
                             ->where('department_id', $get('department_id'))
                             ->where('basic_account', $get('basic_account'))
                             ->pluck('account_name', 'id');
                     })
                     ->required()
-                    ->live() // Enable live updates
+                    ->live()
                     ->label(__('f28.account_segments'))
-                    ->afterStateUpdated(fn (Forms\Set $set) => $set('sub_account_segment_id', null)), // Reset sub-account segment when account segment changes
+                    ->afterStateUpdated(fn (Forms\Set $set) => $set('sub_account_segment_id', null)),
 
                 Forms\Components\Select::make('sub_account_segment_id')
                     ->options(function (Forms\Get $get) {
-                        // Load sub-account segments filtered by account segment
                         return \App\Models\SubAccountSegment::query()
                             ->where('account_segment_id', $get('account_segment_id'))
                             ->pluck('sub_account_name', 'id');
@@ -81,28 +84,28 @@ class LedgerResource extends Resource
                     ->label(__('f28.sub_account_segments'))
                     ->afterStateUpdated(fn (Forms\Set $set) => $set('control_account_id', null)),
 
-                Forms\Components\TextInput::make('ledger_number')
+                Forms\Components\TextInput::make('number')
                     ->required()
                     ->maxLength(50)
                     ->label(__('f28.ledger_number')),
 
-                Forms\Components\TextInput::make('ledger_name')
+                Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255)
                     ->label(__('f28.ledger_name')),
 
                 Forms\Components\Select::make('control_account_id')
                     ->options(function (Forms\Get $get) {
-                        // Load control accounts filtered by sub-account segment
-                        return \App\Models\ControlAccount::query()
+                        return \App\Models\LedgerController::query()
+                            ->where('type', 'control_account')
                             ->where('sub_account_segment_id', $get('sub_account_segment_id'))
-                            ->pluck('account_name', 'id');
+                            ->pluck('name', 'id');
                     })
                     ->label(__('f28.control_account_name')),
 
                 Forms\Components\CheckboxList::make('basic_ledger')
-                    ->options(ImportantParameterHelper::getValues('basic_ledger')) // Fetch options from ImportantParameterHelper
-                    ->columns(1) // Display options in 3 columns
+                    ->options(ImportantParameterHelper::getValues('basic_ledger'))
+                    ->columns(1)
                     ->label(__('f28.basic_ledger')),
 
                 Forms\Components\Toggle::make('f8_number')
@@ -123,9 +126,8 @@ class LedgerResource extends Resource
                 Tables\Columns\TextColumn::make('basic_account')
                     ->label(__('f28.basic_accounts'))
                     ->formatStateUsing(function ($state) {
-                        // Fetch the label for the stored value from ImportantParameterHelper
                         $basicAccounts = ImportantParameterHelper::getValues('basic_accounts');
-                        return $basicAccounts[$state] ?? $state; // Return the label or the raw value if not found
+                        return $basicAccounts[$state] ?? $state;
                     })
                     ->searchable(),
 
@@ -139,33 +141,20 @@ class LedgerResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('ledger_number')
+                Tables\Columns\TextColumn::make('number')
                     ->label(__('f28.ledger_number'))
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('ledger_name')
+                Tables\Columns\TextColumn::make('name')
                     ->label(__('f28.ledger_name'))
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('controlAccount.account_name')
-                    ->label(__('f28.control_account_name'))
-                    ->sortable()
-                    ->searchable(),
-
-                /*Tables\Columns\TextColumn::make('basic_ledger')
-                    ->label('Basic Ledger')
-                    ->formatStateUsing(function ($state) {
-                        // Fetch the labels for the stored values from ImportantParameterHelper
-                        $basicLedger = ImportantParameterHelper::getValues('basic_ledger');
-                        return collect($state)->map(fn ($value) => $basicLedger[$value] ?? $value)->implode(', ');
-                    }),
-
                 Tables\Columns\IconColumn::make('f8_number')
-                    ->label('F8 Number')
-                    ->boolean(),*/
+                    ->label(__('f28.f8_number'))
+                    ->boolean(),
             ])
             ->filters([
-                //
+                // Add any additional filters you need
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()->modal(),
@@ -182,7 +171,7 @@ class LedgerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            // Add any relations you need
         ];
     }
 

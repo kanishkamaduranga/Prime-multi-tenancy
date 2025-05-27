@@ -16,10 +16,8 @@ return new class extends Migration
             $table->string('basic_account', 50);
             $table->bigInteger('account_segment_id')->unsigned();
             $table->bigInteger('sub_account_segment_id')->unsigned();
-            $table->string('account_number', 50)->nullable(); // From control_accounts
-            $table->string('account_name', 255)->nullable(); // From control_accounts
-            $table->string('ledger_number', 50)->nullable(); // From ledgers
-            $table->string('ledger_name', 255)->nullable(); // From ledgers
+            $table->string('number', 50); // combines account_number and ledger_number
+            $table->string('name', 255);  // combines account_name and ledger_name
             $table->bigInteger('control_account_id')->unsigned()->nullable();
             $table->json('basic_ledger')->nullable();
             $table->boolean('f8_number')->default(false);
@@ -42,8 +40,8 @@ return new class extends Migration
                     'basic_account' => $account->basic_account,
                     'account_segment_id' => $account->account_segment_id,
                     'sub_account_segment_id' => $account->sub_account_segment_id,
-                    'account_number' => $account->account_number,
-                    'account_name' => $account->account_name,
+                    'number' => $account->account_number,
+                    'name' => $account->account_name,
                     'basic_ledger' => $account->basic_ledger,
                     'created_at' => $account->created_at,
                     'updated_at' => $account->updated_at,
@@ -62,8 +60,8 @@ return new class extends Migration
                     'basic_account' => $ledger->basic_account,
                     'account_segment_id' => $ledger->account_segment_id,
                     'sub_account_segment_id' => $ledger->sub_account_segment_id,
-                    'ledger_number' => $ledger->ledger_number,
-                    'ledger_name' => $ledger->ledger_name,
+                    'number' => $ledger->ledger_number,
+                    'name' => $ledger->ledger_name,
                     'control_account_id' => $ledger->control_account_id,
                     'basic_ledger' => $ledger->basic_ledger,
                     'f8_number' => $ledger->f8_number,
@@ -151,7 +149,7 @@ return new class extends Migration
             $table->dropForeign(['ledger_id']);
         });
         Schema::table('configuration_form_ledgers', function ($table) {
-            $table->dropForeign(['credit_ledger_id']);
+            $table->dropForeign(['debit_ledger_id']);
             $table->dropForeign(['credit_ledger_id']);
         });
 
