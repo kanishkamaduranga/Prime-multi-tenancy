@@ -45,6 +45,7 @@ class BankAccount extends Model
 
     public function ledger()
     {
-        return $this->belongsTo(Ledger::class);
+        return $this->belongsTo(LedgerController::class, 'ledger_id')
+            ->where('type', 'ledger');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BankAccountResource\Pages;
 use App\Filament\Resources\BankAccountResource\RelationManagers;
 use App\Models\BankAccount;
+use App\Models\LedgerController;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -128,13 +129,13 @@ class BankAccountResource extends Resource
 
                 Forms\Components\Select::make('ledger_id')
                     ->options(function (Forms\Get $get) {
-                        // Load ledgers filtered by sub-account segment
-                        return \App\Models\Ledger::query()
+                        return LedgerController::where('type', 'ledger')
                             ->where('sub_account_segment_id', $get('sub_account_segment_id'))
-                            ->pluck('ledger_name', 'id');
+                            ->selectRaw("id, CONCAT(number, ' - ', name) as ledger_full")
+                            ->pluck('ledger_full', 'id');
                     })
                     ->required()
-                    ->searchable() // Enable search for dropdown
+                    ->searchable()
                     ->label(__('f28.ledger_name')),
             ]);
     }
@@ -194,8 +195,11 @@ class BankAccountResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('ledger.ledger_name')
+                Tables\Columns\TextColumn::make('ledger.name')
                     ->label(__('f28.ledger_name'))
+                    ->formatStateUsing(fn ($state, $record) =>
+                        $record->ledger->number . ' - ' . $state
+                    )
                     ->sortable()
                     ->searchable(),
             ])
