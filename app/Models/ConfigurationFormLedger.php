@@ -22,11 +22,11 @@ class ConfigurationFormLedger extends Model
 
     public function debitLedger()
     {
-        return $this->belongsTo(Ledger::class, 'debit_ledger_id');
+        return $this->belongsTo(LedgerController::class, 'debit_ledger_id');
     }
 
     public function creditLedger()
     {
-        return $this->belongsTo(Ledger::class, 'credit_ledger_id');
+        return $this->belongsTo(LedgerController::class, 'credit_ledger_id');
     }
 }
