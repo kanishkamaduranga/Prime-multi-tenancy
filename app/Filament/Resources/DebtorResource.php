@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\DebtorResource\Pages;
 use App\Filament\Resources\DebtorResource\RelationManagers;
 use App\Models\Debtor;
+use App\Models\LedgerController;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -73,8 +74,12 @@ class DebtorResource extends Resource
                 // Control Account (FK to control_accounts)
                 Forms\Components\Select::make('control_account_id')
                     ->label(__('f28.control_account_name'))
-                    ->relationship('controlAccount', 'account_name') // Assuming 'name' is a field in control_accounts
-                    //->searchable()
+                    ->options(function () {
+                        return LedgerController::where('type', 'control_account')
+                            ->selectRaw("id, CONCAT(number, ' - ', name) as account_full")
+                            ->pluck('account_full', 'id');
+                    })
+                    ->searchable()
                     ->required(),
 
                 // Saved Amount
@@ -100,7 +105,13 @@ class DebtorResource extends Resource
                 TextColumn::make('debtor_name')->label(__('f28.debtor_name'))->sortable()->searchable(),
                 TextColumn::make('address')->label(__('f28.address'))->limit(50), // Limit address length for display
                 TextColumn::make('telephone_number')->label(__('f28.telephone_number'))->sortable()->searchable(),
-                TextColumn::make('controlAccount.account_name')->label(__('f28.control_account_name'))->sortable()->searchable(),
+                TextColumn::make('controlAccount.name')
+                    ->label(__('f28.control_account_name'))
+                    ->formatStateUsing(fn ($state, $record) =>
+                        $record->controlAccount->number . ' - ' . $state
+                    )
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('saved_amount')->label(__('f28.saved_amount'))->sortable()->money('LKR'), // Format as currency
                 TextColumn::make('date')->label(__('f28.date'))->date(), // Format as date
             ])

@@ -22,10 +22,13 @@ class Debtor extends Model
     ];
 
     // Relationship to ControlAccount
-    public function controlAccount(): BelongsTo
+
+    public function controlAccount()
     {
-        return $this->belongsTo(ControlAccount::class, 'control_account_id');
+        return $this->belongsTo(LedgerController::class, 'control_account_id')
+            ->where('type', 'control_account');
     }
+
 
     // Auto-generate debtor_number after the model is created
     protected static function boot()

@@ -6,7 +6,7 @@ use App\Filament\Resources\ConfigurationFormLedgerResource\Pages;
 use App\Filament\Resources\ConfigurationFormLedgerResource\RelationManagers;
 use App\Models\ConfigurationFormLedger;
 use App\Models\Department;
-use App\Models\Ledger;
+use App\Models\LedgerController;
 use App\Helpers\ImportantParameterHelper;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -58,8 +58,7 @@ class ConfigurationFormLedgerResource extends Resource
                         Forms\Components\Select::make('debit_ledger_id')
                             ->label(__('f28.debit'))
                             ->options(function () {
-                                return Ledger::query()
-                                    ->selectRaw("id, CONCAT(ledger_number, ' - ', ledger_name) as ledger_full")
+                                return LedgerController::selectRaw("id, CONCAT(number, ' - ', name) as ledger_full")
                                     ->pluck('ledger_full', 'id');
                             })
                             ->required()
@@ -68,8 +67,7 @@ class ConfigurationFormLedgerResource extends Resource
                         Forms\Components\Select::make('credit_ledger_id')
                             ->label(__('f28.credit'))
                             ->options(function () {
-                                return Ledger::query()
-                                    ->selectRaw("id, CONCAT(ledger_number, ' - ', ledger_name) as ledger_full")
+                                return LedgerController::selectRaw("id, CONCAT(number, ' - ', name) as ledger_full")
                                     ->pluck('ledger_full', 'id');
                             })
                             ->required()
@@ -96,17 +94,17 @@ class ConfigurationFormLedgerResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('debitLedger.ledger_number')
+                Tables\Columns\TextColumn::make('debitLedger.number')
                     ->label(__('f28.debit'))
                     ->formatStateUsing(fn ($state, $record) =>
-                        $state . ' - ' . $record->debitLedger->ledger_name
+                        $state . ' - ' . $record->debitLedger->name
                     )
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('creditLedger.ledger_number')
+                Tables\Columns\TextColumn::make('creditLedger.number')
                     ->label(__('f28.credit'))
                     ->formatStateUsing(fn ($state, $record) =>
-                        $state . ' - ' . $record->creditLedger->ledger_name
+                        $state . ' - ' . $record->creditLedger->name
                     )
                     ->searchable(),
             ])

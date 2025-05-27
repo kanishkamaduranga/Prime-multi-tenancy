@@ -19,10 +19,11 @@ class Manager extends Model
         'status'
     ];
 
-    // Relationship to ControlAccount
+
     public function controlAccount(): BelongsTo
     {
-        return $this->belongsTo(ControlAccount::class, 'control_account_id');
+        return $this->belongsTo(LedgerController::class, 'control_account_id')
+            ->where('type', 'control_account');
     }
 
     // Relationship to Department

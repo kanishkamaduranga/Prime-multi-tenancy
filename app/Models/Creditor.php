@@ -23,8 +23,10 @@ class Creditor extends Model
 
     public function controlAccount()
     {
-        return $this->belongsTo(ControlAccount::class);
+        return $this->belongsTo(LedgerController::class, 'control_account_id')
+            ->where('type', 'control_account');
     }
+
 
     // Auto-generate creditors number before creating the record
     protected static function boot()

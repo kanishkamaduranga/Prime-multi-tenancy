@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ManagerResource\Pages;
 use App\Filament\Resources\ManagerResource\RelationManagers;
 use App\Models\Manager;
+use App\Models\LedgerController;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -55,11 +56,15 @@ class ManagerResource extends Resource
                     ->label(__('f28.manager_name'))
                     ->required(),
 
-                // Control Account (FK to control_accounts)
+                // Control Account (now from ledger_controllers where type=control_account)
                 Forms\Components\Select::make('control_account_id')
                     ->label(__('f28.control_account'))
-                    ->relationship('controlAccount', 'account_name') // Assuming 'name' is a field in control_accounts
-                   // ->searchable()
+                    ->options(function () {
+                        return LedgerController::where('type', 'control_account')
+                            ->selectRaw("id, CONCAT(number, ' - ', name) as account_full")
+                            ->pluck('account_full', 'id');
+                    })
+                    ->searchable()
                     ->required(),
 
                 // Department (FK to departments)
@@ -102,7 +107,13 @@ class ManagerResource extends Resource
             ->columns([
                 TextColumn::make('manager_number')->label(__('f28.manager_number'))->sortable()->searchable(),
                 TextColumn::make('manager_name')->label(__('f28.manager_name'))->sortable()->searchable(),
-                TextColumn::make('controlAccount.account_name')->label(__('f28.control_account'))->sortable()->searchable(),
+                TextColumn::make('controlAccount.name')
+                    ->label(__('f28.control_account'))
+                    ->formatStateUsing(fn ($state, $record) =>
+                        $record->controlAccount->number . ' - ' . $state
+                    )
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('department.department')->label(__('f28.department'))->sortable()->searchable(),
                 TextColumn::make('branchType.branch_type_name')->label(__('f28.branch_type'))->sortable()->searchable(),
                // TextColumn::make('branches.branch_name')->label('Branches')->sortable()->searchable(),
