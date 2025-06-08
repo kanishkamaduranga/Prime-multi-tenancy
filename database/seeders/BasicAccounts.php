@@ -22,7 +22,7 @@ class BasicAccounts extends Seeder
         ImportantParameter::create([
             'key' => 'basic_accounts',
             'slug' => 'stock',
-            'label_si' => 'ස්කන්ධය',
+            'label_si' => 'ස්කන්ධ හා වගකිම්',
             'label_ta' => 'பங்கு',
             'label_en' => 'Stock',
         ]);
@@ -53,6 +53,13 @@ class BasicAccounts extends Seeder
             'label_si' => 'පාලන ගිණුම්',
             'label_ta' => 'கணக்குகளைக் கட்டுப்படுத்து',
             'label_en' => 'Control Accounts',
+        ]);
+        ImportantParameter::create([
+            'key' => 'basic_accounts',
+            'slug' => 'expenses',
+            'label_si' => 'වියදම්',
+            'label_ta' => 'செலவுகள்',
+            'label_en' => 'Expenses',
         ]);
     }
 }
