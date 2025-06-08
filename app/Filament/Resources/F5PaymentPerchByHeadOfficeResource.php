@@ -63,6 +63,18 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                                 }
                             }),
 
+//                        Forms\Components\Select::make('bank_account_id')
+//                            ->label('Bank Account')
+//                            ->options(function (Forms\Get $get) {
+//                                if (!$get('department_id')) {
+//                                    return \App\Models\BankAccount::pluck('bank_account_name', 'id');
+//                                }
+//                                return \App\Models\BankAccount::where('department_id', $get('department_id'))
+//                                    ->pluck('bank_account_name', 'id');
+//                            })
+//                            ->required()
+//                            ->searchable(),
+
                         Forms\Components\Select::make('bank_account_id')
                             ->label('Bank Account')
                             ->options(function (Forms\Get $get) {
@@ -73,7 +85,32 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                                     ->pluck('bank_account_name', 'id');
                             })
                             ->required()
-                            ->searchable(),
+                            ->searchable()
+                            ->live()
+                            ->afterStateUpdated(function ($state) {
+                                // This triggers the balance update
+                            }),
+
+                        Forms\Components\Placeholder::make('account_balance')
+                            ->label('Current Balance')
+                            ->content(function (Forms\Get $get) {
+                                if (!$get('bank_account_id')) {
+                                    return 'N/A';
+                                }
+
+                                $account = \App\Models\BankAccount::find($get('bank_account_id'));
+                                if (!$account) {
+                                    return 'N/A';
+                                }
+
+                                $balance = ImportantParameterHelper::getBankBalance($account->account_number);
+                                return number_format($balance, 2) . ' ' . $account->currency;
+                            })
+                            ->extraAttributes([
+                                'class' => 'self-end pb-1', // Aligns with select input
+                            ])
+                            ->columnSpan(1),
+
 
                         Forms\Components\TextInput::make('cheque_receiver')
                             ->label('Cheque Receiver')

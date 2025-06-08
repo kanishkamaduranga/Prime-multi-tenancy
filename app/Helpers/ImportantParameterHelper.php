@@ -8,6 +8,17 @@ use App\Services\LanguageService;
 class ImportantParameterHelper
 {
 
+    /**
+     * calculate and return account balance
+     *
+     * @param string $account_number
+     * @return double
+     *
+     **/
+    public static function getBankBalance($account_number)
+    {
+        return 000.00;
+    }
 
     /**
      * Get values based on the selected language.
