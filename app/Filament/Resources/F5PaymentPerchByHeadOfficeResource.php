@@ -191,10 +191,12 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                 Tables\Columns\TextColumn::make('payment_type')
                     ->label('Payment Type'),
 
-                Tables\Columns\TextColumn::make('paymentDetails_sum_price')
+                Tables\Columns\TextColumn::make('total_amount')
                     ->label('Total Amount')
-                    ->sum('paymentDetails', 'price')
-                    ->numeric(decimalPlaces: 2),
+                    ->numeric(decimalPlaces: 2)
+                    ->state(function ($record) {
+                        return $record->paymentDetails->sum('price');
+                    }),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Date')

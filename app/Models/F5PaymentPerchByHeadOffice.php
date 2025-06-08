@@ -47,12 +47,17 @@ class F5PaymentPerchByHeadOffice extends Model
     public function paymentDetails()
     {
         return $this->hasMany(F5PaymentDetail::class, 'reference_id')
-            ->where('reference_table', $this->getTable());
+            ->where('reference_table', 'head_office');
     }
 
     public function getReferenceTable(): string
     {
         return 'head_office'; // Unique identifier for this form
+    }
+
+    public function getTotalAmountAttribute()
+    {
+        return $this->paymentDetails->sum('price');
     }
 
     protected static function boot()
