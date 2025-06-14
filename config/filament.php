@@ -86,4 +86,10 @@ return [
 
     'livewire_loading_delay' => 'default',
 
+
+
+    'resources' => [
+        'namespace' => 'App\\Filament\\Resources',
+        'path' => app_path('Filament/Resources'),
+    ],
 ];
