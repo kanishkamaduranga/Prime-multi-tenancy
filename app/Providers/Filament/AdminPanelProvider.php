@@ -30,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
     {
         $groups = [
             'basic_notes' => trans('f28.Basic_Notes'),
+            'payments'  => trans('f28.Payments'),
             'user'  => trans('f28.User'),
         ];
 

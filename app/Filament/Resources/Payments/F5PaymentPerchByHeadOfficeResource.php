@@ -20,38 +20,47 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    protected static ?string $navigationGroup = 'Payments';
+    protected static ?string $navigationGroup = 'payments';
 
-    protected static ?string $modelLabel = 'Payment Perched by Head Office';
+    public static function getModelLabel(): string
+    {
+        return trans('f28.f5_payment_perch_by_head_office');
+    }
 
-    protected static ?string $pluralModelLabel = 'Payments Perched by Head Office';
+    public static function getNavigationLabel(): string
+    {
+        return trans('f28.f5_payment_perch_by_head_office');
+    }
 
-    protected static ?string $navigationLabel = 'Payments Perched by HO';
+    public static function getPluralModelLabel(): string
+    {
+        return trans('f28.f5_payment_perch_by_head_office');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Payment Information')
+                Forms\Components\Section::make(__('f28.regular_payments'))
                     ->schema([
                         Forms\Components\TextInput::make('voucher_number')
-                            ->label('Voucher Number')
+                            ->label(__('f28.voucher_number'))
                             ->disabled()
                             ->dehydrated(),
 
                         Forms\Components\TextInput::make('cooppen_number')
-                            ->label('Cooppen Number')
+                            ->label(__('f28.cooppen_number'))
                             ->nullable(),
 
                         Forms\Components\Select::make('department_id')
-                            ->label('Department')
+                            ->label(__('f28.department'))
                             ->options(fn () => \App\Models\Department::pluck('department', 'id'))
                             ->required()
                             ->live()
                             ->searchable(),
 
                         Forms\Components\Select::make('supplier_id')
-                            ->label('Supplier')
+                            ->label(__('f28.supplier'))
                             ->options(fn () => \App\Models\Creditor::pluck('creditor_name', 'id'))
                             ->required()
                             ->live()
@@ -63,20 +72,9 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                                 }
                             }),
 
-//                        Forms\Components\Select::make('bank_account_id')
-//                            ->label('Bank Account')
-//                            ->options(function (Forms\Get $get) {
-//                                if (!$get('department_id')) {
-//                                    return \App\Models\BankAccount::pluck('bank_account_name', 'id');
-//                                }
-//                                return \App\Models\BankAccount::where('department_id', $get('department_id'))
-//                                    ->pluck('bank_account_name', 'id');
-//                            })
-//                            ->required()
-//                            ->searchable(),
 
                         Forms\Components\Select::make('bank_account_id')
-                            ->label('Bank Account')
+                            ->label(__('f28.bank_account'))
                             ->options(function (Forms\Get $get) {
                                 if (!$get('department_id')) {
                                     return \App\Models\BankAccount::pluck('bank_account_name', 'id');
@@ -92,7 +90,7 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                             }),
 
                         Forms\Components\Placeholder::make('account_balance')
-                            ->label('Current Balance')
+                            ->label(__('f28.account_balance'))
                             ->content(function (Forms\Get $get) {
                                 if (!$get('bank_account_id')) {
                                     return 'N/A';
@@ -117,12 +115,12 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                             ->required(),
 
                         Forms\Components\Textarea::make('summary')
-                            ->label('Summary')
+                            ->label(__('f28.summary'))
                             ->nullable()
                             ->columnSpanFull(),
 
                         Forms\Components\Select::make('payment_type')
-                            ->label('Payment Type')
+                            ->label(__('f28.payment_type'))
                             ->options(ImportantParameterHelper::getValues('payment_types'))
                             ->required(),
 
@@ -131,7 +129,7 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make('Payment Details')
+                Forms\Components\Section::make(__('f28.payment_details'))
                     ->schema([
                         Forms\Components\Repeater::make('paymentDetails')
                             ->relationship()
@@ -141,11 +139,11 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                             })
                             ->schema([
                                 Forms\Components\TextInput::make('details')
-                                    ->label('Description')
+                                    ->label(__('f28.description'))
                                     ->required(),
 
                                 Forms\Components\TextInput::make('price')
-                                    ->label('Amount')
+                                    ->label(__('f28.amount'))
                                     ->numeric()
                                     ->required()
                                     ->live(debounce: 500) // Add live update
@@ -154,7 +152,7 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                                     }),
 
                                 Forms\Components\Select::make('place_id')
-                                    ->label('Place/Branch')
+                                    ->label(__('f28.place_branch'))
                                     ->options(function (Forms\Get $get) {
                                         if (!$get('../../department_id')) {
                                             return \App\Models\Branch::pluck('branch_name', 'id');
@@ -167,13 +165,13 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                             ])
                             ->columns(3)
                             ->defaultItems(1)
-                            ->addActionLabel('Add Payment Detail')
+                            ->addActionLabel(__('f28.add_payment_detail'))
                             ->reorderable()
                             ->collapsible()
                             ->itemLabel(fn (array $state): ?string => $state['details'] ?? null),
 
                         Forms\Components\Placeholder::make('total_amount')
-                            ->label('Total Amount')
+                            ->label(__('f28.total_amount'))
                             ->content(function (Forms\Get $get) {
                                 $total = 0;
                                 foreach ($get('paymentDetails') ?? [] as $detail) {
@@ -214,29 +212,29 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('voucher_number')
-                    ->label('Voucher No')
+                    ->label(__('f28.voucher_number'))
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('department.department')
-                    ->label('Department')
+                    ->label(__('f28.department'))
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('supplier.creditor_name')
-                    ->label('Supplier')
+                    ->label(__('f28.supplier'))
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('payment_type')
-                    ->label('Payment Type'),
+                    ->label(__('f28.payment_type')),
 
                 Tables\Columns\TextColumn::make('total_amount')
-                    ->label('Total Amount')
+                    ->label(__('f28.total_amount'))
                     ->numeric(decimalPlaces: 2)
                     ->state(function ($record) {
                         return $record->paymentDetails->sum('price');
                     }),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Date')
+                    ->label(__('f28.date'))
                     ->date(),
             ])
             ->filters([

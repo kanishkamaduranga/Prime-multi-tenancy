@@ -109,4 +109,21 @@ return [
     'credit' =>  'බැර',
 
     'User' =>  'පරිශීලක',
+
+    'Payments' =>  'ගෙවීම්',
+
+    'f5_payment_perch_by_head_office' =>  'ප්‍රධාන කාර්යාලය මුදලට ගැනුම් සදහා මුදල් ගෙවීම - F5',
+    'regular_payments' => 'සාමාන්‍ය ගෙවීම්',
+    'voucher_number' =>  'වවුචර්_අංකය',
+    'cooppen_number'    =>  'කූපන් අංකය',
+    'account_balance' =>    'ගිණුම් ශේෂය',
+    'cheque_receiver'   =>  'චෙක්පත් ලබන්නා',
+    'summary' =>  'සාරාංශය',
+    'payment_type' =>  'ගෙවීම් ක්‍රමය',
+    'payment_details' =>  'ගෙවීම් විස්තර',
+    'description' =>    'විස්තර',
+    'amount' =>  'ප්‍රමාණය',
+    'place_branch' => 'ස්ථානය/ශාඛාව',
+    'add_payment_detail' =>  'Add Payment Detail',
+    'total_amount' =>  'එකතුව',
 ];

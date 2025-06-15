@@ -112,4 +112,20 @@ return [
 
     'User' =>  'User',
 
+    'Payments' =>  'Payments',
+
+    'f5_payment_perch_by_head_office' =>  'Payment for purchases made at the head office - F5',
+    'regular_payments' => 'Regular payments',
+    'voucher_number' =>  'Voucher Number',
+    'cooppen_number'    =>  'Cooppen Number',
+    'account_balance' =>    'Account Balance',
+    'cheque_receiver'   =>  'Cheque Receiver',
+    'summary' =>  'Summary',
+    'payment_type' =>  'Payment Type',
+    'payment_details' =>  'Payment Details',
+    'description' =>    'Description',
+    'amount' =>  'Amount',
+    'place_branch' => 'Place/Branch',
+    'add_payment_detail' =>  'Add Payment Detail',
+    'total_amount' =>  'Total Amount',
 ];
