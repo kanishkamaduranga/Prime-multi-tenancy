@@ -23,6 +23,7 @@ use App\Filament\Resources\ProductResource;
 use App\Filament\Widgets\LanguageSwitcher;
 use App\Http\Middleware\SetLocale;
 use Filament\Navigation\UserMenuItem;
+use App\Http\Middleware\CheckFilamentPermissions;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -30,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
     {
         $groups = [
             'basic_notes' => trans('f28.Basic_Notes'),
+            'payments'  => trans('f28.Payments'),
             'user'  => trans('f28.User'),
         ];
 
@@ -69,6 +71,7 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
                 SetLocale::class,
+                CheckFilamentPermissions::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
