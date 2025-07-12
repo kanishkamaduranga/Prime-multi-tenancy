@@ -16,6 +16,27 @@ use Illuminate\Database\Eloquent\Builder;
 
 class LedgerResource extends Resource
 {
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('Ledgers_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('Ledgers_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('Ledgers_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('Ledgers_delete');
+    }
+
     protected static ?string $model = LedgerController::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';

@@ -15,6 +15,31 @@ use Illuminate\Database\Eloquent\Builder;
 
 class UserResource extends Resource
 {
+    public static function canViewAny(): bool
+    {
+        if (auth()->user()->hasRole('Super Admin')){
+            \Log::info('user manager Super admin ', [auth()->user()->can('UserManagement_view')]);
+            return true;
+        }
+            \Log::info('user manager ', [auth()->user()->can('UserManagement_view')]);
+        return auth()->user()->can('UserManagement_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('UserManagement_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('UserManagement_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('UserManagement_delete');
+    }
+
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

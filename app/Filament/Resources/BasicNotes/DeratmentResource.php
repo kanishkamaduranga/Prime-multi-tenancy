@@ -14,6 +14,26 @@ use Filament\Tables\Table;
 
 class DeratmentResource extends Resource
 {
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('Departments_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('Departments_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('Departments_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('Departments_delete');
+    }
+
     protected static ?string $model = Department::class;
 
     protected static ?string $navigationGroup = 'basic_notes'; // Group under "basic_notes"

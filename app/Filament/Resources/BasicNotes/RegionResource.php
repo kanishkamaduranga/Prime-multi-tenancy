@@ -14,6 +14,27 @@ use Filament\Tables\Table;
 
 class RegionResource extends Resource
 {
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('Regions_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('Regions_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('Regions_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('Regions_delete');
+    }
+
     protected static ?string $model = Region::class;
 
     protected static ?string $navigationGroup = 'basic_notes'; // Group under "basic_notes"

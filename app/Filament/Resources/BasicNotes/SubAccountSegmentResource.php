@@ -15,6 +15,26 @@ use Filament\Tables\Table;
 
 class SubAccountSegmentResource extends Resource
 {
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('SubAccountSegments_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('SubAccountSegments_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('SubAccountSegments_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('SubAccountSegments_delete');
+    }
+
     protected static ?string $model = SubAccountSegment::class;
 
     protected static ?string $navigationGroup = 'basic_notes';

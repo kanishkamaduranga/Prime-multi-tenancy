@@ -14,6 +14,27 @@ use Filament\Tables\Table;
 
 class BranchResource extends Resource
 {
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('Branches_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('Branches_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('Branches_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('Branches_delete');
+    }
+
     protected static ?string $model = Branch::class;
 
     protected static ?string $navigationGroup = 'basic_notes'; // Group under "basic_notes"

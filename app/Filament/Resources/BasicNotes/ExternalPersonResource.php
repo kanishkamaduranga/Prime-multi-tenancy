@@ -14,6 +14,26 @@ use Filament\Tables\Table;
 
 class ExternalPersonResource extends Resource
 {
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('ExternalPeople_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('ExternalPeople_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('ExternalPeople_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('ExternalPeople_delete');
+    }
+
     protected static ?string $model = ExternalPerson::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-hand-raised';

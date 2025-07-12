@@ -16,6 +16,27 @@ use Filament\Tables\Table;
 
 class DebtorResource extends Resource
 {
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('Debtors_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('Debtors_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('Debtors_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('Debtors_delete');
+    }
+
     protected static ?string $model = Debtor::class;
     protected static ?string $navigationGroup = 'basic_notes';
     protected static ?int $navigationSort = 17;

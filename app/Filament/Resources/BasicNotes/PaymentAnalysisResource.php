@@ -15,6 +15,26 @@ use Filament\Tables\Table;
 
 class PaymentAnalysisResource extends Resource
 {
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('PaymentAnalyses_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('PaymentAnalyses_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('PaymentAnalyses_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('PaymentAnalyses_delete');
+    }
+
     protected static ?string $model = PaymentAnalysis::class;
 
     protected static ?string $navigationGroup = 'basic_notes';

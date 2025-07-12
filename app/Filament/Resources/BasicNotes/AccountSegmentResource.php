@@ -15,6 +15,28 @@ use Filament\Tables\Table;
 
 class AccountSegmentResource extends Resource
 {
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('AccountSegments_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('AccountSegments_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('AccountSegments_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('AccountSegments_delete');
+    }
+
+
     protected static ?string $model = AccountSegment::class;
     protected static ?string $navigationGroup = 'basic_notes';
 

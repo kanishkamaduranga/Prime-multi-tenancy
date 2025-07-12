@@ -19,7 +19,7 @@ class PermissionSeeder extends Seeder
             "ControlAccounts",
             "Creditors",
             "Debtors",
-            "Deratments",
+            "Departments",
             "DepartmentCategory",
             "Employees",
             "ExternalPeople",
@@ -32,6 +32,7 @@ class PermissionSeeder extends Seeder
             "SubAccountSegments",
             "Vehicles",
             "VehiclesRenteds",
+            "UserManagement",
         ];
 
         $action_list = [  'view', 'create', 'edit', 'delete'  ];

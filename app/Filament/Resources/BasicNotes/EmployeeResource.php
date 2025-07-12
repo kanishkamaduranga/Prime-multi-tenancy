@@ -18,6 +18,26 @@ use Filament\Tables\Table;
 
 class EmployeeResource extends Resource
 {
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('Employees_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('Employees_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('Employees_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('Employees_delete');
+    }
+
     protected static ?string $model = Employee::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';

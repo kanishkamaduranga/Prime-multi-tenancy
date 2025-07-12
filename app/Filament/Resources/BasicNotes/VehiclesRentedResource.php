@@ -16,6 +16,26 @@ use Filament\Tables\Table;
 
 class VehiclesRentedResource extends Resource
 {
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('VehiclesRenteds_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('VehiclesRenteds_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('VehiclesRenteds_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('VehiclesRenteds_delete');
+    }
+
     protected static ?string $model = VehiclesRented::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-truck';

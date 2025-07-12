@@ -17,6 +17,27 @@ use Filament\Tables\Table;
 
 class ManagerResource extends Resource
 {
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('Managers_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('Managers_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('Managers_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('Managers_delete');
+    }
+
     protected static ?string $model = Manager::class;
 
     protected static ?string $navigationGroup = 'basic_notes';

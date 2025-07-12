@@ -15,6 +15,38 @@ use Illuminate\Database\Eloquent\Builder;
 
 class PermissionResource extends Resource
 {
+    public static function canViewAny(): bool
+    {
+        if (auth()->user()->hasRole('Super Admin')){
+            return true;
+        }
+        return auth()->user()->can('UserPermission_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        if (auth()->user()->hasRole('Super Admin')){
+            return true;
+        }
+        return auth()->user()->can('UserPermission_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        if (auth()->user()->hasRole('Super Admin')){
+            return true;
+        }
+        return auth()->user()->can('UserPermission_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        if (auth()->user()->hasRole('Super Admin')){
+            return true;
+        }
+        return auth()->user()->can('UserPermission_delete');
+    }
+
     protected static ?string $model = Permission::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

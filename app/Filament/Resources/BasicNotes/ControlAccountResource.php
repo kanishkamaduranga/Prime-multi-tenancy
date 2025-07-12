@@ -16,6 +16,27 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ControlAccountResource extends Resource
 {
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('ControlAccounts_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('ControlAccounts_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('ControlAccounts_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('ControlAccounts_delete');
+    }
+
     protected static ?string $model = LedgerController::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-calculator';

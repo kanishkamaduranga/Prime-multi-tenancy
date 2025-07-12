@@ -16,6 +16,26 @@ use Filament\Tables\Table;
 
 class VehicleResource extends Resource
 {
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('Vehicles_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('Vehicles_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('Vehicles_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('Vehicles_delete');
+    }
+
     protected static ?string $model = Vehicle::class;
 
     protected static ?string $navigationGroup = 'basic_notes';

@@ -15,6 +15,39 @@ use Illuminate\Database\Eloquent\Builder;
 
 class RoleResource extends Resource
 {
+
+    public static function canViewAny(): bool
+    {
+        if (auth()->user()->hasRole('Super Admin')){
+            return true;
+        }
+        return auth()->user()->can('UserRole_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        if (auth()->user()->hasRole('Super Admin')){
+            return true;
+        }
+        return auth()->user()->can('UserRole_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        if (auth()->user()->hasRole('Super Admin')){
+            return true;
+        }
+        return auth()->user()->can('UserRole_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        if (auth()->user()->hasRole('Super Admin')){
+            return true;
+        }
+        return auth()->user()->can('UserRole_delete');
+    }
+
     protected static ?string $model = Role::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

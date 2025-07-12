@@ -51,7 +51,10 @@ class CheckFilamentPermissions
 
             if ($resource && $action) {
 
-                $permission = str_replace(' ', '', ucwords(str_replace('-', ' ', $resource))) . "_" . ($action == 'index' ? 'view' : $action);
+                $resource_text = str_replace(' ', '', ucwords(str_replace('-', ' ', $resource)));
+                $resource_text = ('Deratments' == $resource_text ) ? 'Departments' : $resource_text;
+
+                $permission = $resource_text . "_" . ($action == 'index' ? 'view' : $action);
 
                 \Log::info("CheckFilamentPermissions  " ,[
                     'resource' => $resource,

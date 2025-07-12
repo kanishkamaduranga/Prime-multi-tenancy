@@ -14,6 +14,26 @@ use Filament\Tables\Table;
 
 class JournalResource extends Resource
 {
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('Journals_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('Journals_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('Journals_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('Journals_delete');
+    }
+
     protected static ?string $model = Journal::class;
     protected static ?string $navigationGroup = 'basic_notes';
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
