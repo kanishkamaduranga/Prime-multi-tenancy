@@ -128,4 +128,8 @@ return [
     'place_branch' => 'Place/Branch',
     'add_payment_detail' =>  'Add Payment Detail',
     'total_amount' =>  'Total Amount',
+
+    'user_management' =>  'User Management',
+    'user_role' =>  'User Role',
+    'user_permission'   =>  'User Permission',
 ];
