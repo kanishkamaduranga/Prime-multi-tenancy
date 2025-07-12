@@ -14,6 +14,28 @@ use Filament\Tables\Table;
 
 class BankResource extends Resource
 {
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->can('Banks_view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('Banks_create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('Banks_edit');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('Banks_delete');
+    }
+
+
     protected static ?string $model = Bank::class;
 
     protected static ?string $navigationGroup = 'basic_notes'; // Group under "basic_notes"

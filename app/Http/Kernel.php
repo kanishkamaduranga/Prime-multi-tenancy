@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             // Add your custom middleware here
             \App\Http\Middleware\SetLocale::class,
+            \App\Http\Middleware\CheckFilamentPermissions::class,
         ],
 
         'api' => [
