@@ -132,4 +132,11 @@ return [
     'user_management' =>  'User Management',
     'user_role' =>  'User Role',
     'user_permission'   =>  'User Permission',
+
+    'account_report'   =>  'Account Classification Report',
+    'select_all_departments' =>  'Select all departments',
+    'select_all_basic_accounts' => 'Select all basic accounts',
+    'select_all_account_segments' => 'Select all account segments',
+    'select_all_sub-account_segments' => 'Select all sub-account segments',
+    'with_all_ledgers' =>  'With All Ledgers',
 ];

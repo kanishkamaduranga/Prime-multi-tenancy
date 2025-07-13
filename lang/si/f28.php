@@ -126,4 +126,11 @@ return [
     'place_branch' => 'ස්ථානය/ශාඛාව',
     'add_payment_detail' =>  'Add Payment Detail',
     'total_amount' =>  'එකතුව',
+
+    'account_report'    =>  'ගිණුම් වර්ගීකරණය වාර්තාව',
+    'select_all_departments' =>  'සියලුම අංශ තෝරන්න',
+    'select_all_basic_accounts' => 'සියලුම මූලික ගිණුම් තෝරන්න',
+    'select_all_account_segments' => 'සියලුම ගිණුම් තෝරන්න',
+    'select_all_sub-account_segments' => 'සියලුම උප-ගිණුම් තෝරන්න',
+    'with_all_ledgers' =>  'සියලුම ලෙජර් සමඟ',
 ];
