@@ -30,5 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PaymentTypesSeeder::class);
         $this->call(RolePermissionSeeder::class);
         $this->call(PermissionSeeder::class);
+        $this->call(ControlAccountItemAddSeeder::class);
     }
 }

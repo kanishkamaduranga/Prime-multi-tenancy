@@ -133,4 +133,10 @@ return [
     'select_all_account_segments' => 'සියලුම ගිණුම් තෝරන්න',
     'select_all_sub-account_segments' => 'සියලුම උප-ගිණුම් තෝරන්න',
     'with_all_ledgers' =>  'සියලුම ලෙජර් සමඟ',
+
+    'control_account_item_add' => 'පාලන ගිණුම් සඳහා ආයිත්තම් ඇතුළත් කිරීම',
+    'item' =>  'අයිතමය',
+    'item_type' => 'අයිතම වර්ගය',
+    'item_number' => 'අයිතම අංකය',
+    'note'  => 'සටහන',
 ];

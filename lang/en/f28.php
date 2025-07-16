@@ -139,4 +139,10 @@ return [
     'select_all_account_segments' => 'Select all account segments',
     'select_all_sub-account_segments' => 'Select all sub-account segments',
     'with_all_ledgers' =>  'With All Ledgers',
+
+    'control_account_item_add' => 'Entering items into control accounts',
+    'item' =>  'Item',
+    'item_type' => 'Item Type',
+    'item_number'   =>  'Item Number',
+    'note'  =>  'Note',
 ];
