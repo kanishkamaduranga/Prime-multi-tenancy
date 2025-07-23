@@ -31,5 +31,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RolePermissionSeeder::class);
         $this->call(PermissionSeeder::class);
         $this->call(ControlAccountItemAddSeeder::class);
+        $this->call(F5CreditorsSeeder::class);
     }
 }

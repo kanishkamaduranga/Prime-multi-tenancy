@@ -32,24 +32,16 @@ class F5CreditorPaymentsResource extends Resource
                     ->dehydrated(),
                 Forms\Components\TextInput::make('coupon_number')
                     ->label('Coupon Number'),
+
                 Forms\Components\Select::make('department_id')
-                    ->label('Department')
-                    ->relationship('department', 'department')
-                    ->searchable()
-                    ->required()
-                    ->live(),
-                Forms\Components\Select::make('supplier_id')
-                    ->label('Supplier')
-                    ->relationship('supplier', 'creditor_name')
-                    ->searchable()
+                    ->label(__('f28.department'))
+                    ->options(fn () => \App\Models\Department::pluck('department', 'id'))
                     ->required()
                     ->live()
-                    ->afterStateUpdated(function ($state, Forms\Set $set) {
-                        $supplier = \App\Models\Creditor::find($state);
-                        if ($supplier) {
-                            $set('cheque_receiver', $supplier->creditor_name);
-                        }
-                    }),
+                    ->searchable(),
+
+
+
                 Forms\Components\DatePicker::make('date_of_paid')
                     ->label('Date of Paid')
                     ->default(now())
@@ -66,6 +58,22 @@ class F5CreditorPaymentsResource extends Resource
                     ->searchable()
                     ->required()
                     ->live(),
+
+
+                Forms\Components\Select::make('supplier_id')
+                    ->label('Supplier')
+                    ->relationship('supplier', 'creditor_name')
+                    ->options(fn () => \App\Models\Creditor::pluck('creditor_name', 'id'))
+                    ->searchable()
+                    ->required()
+                    ->live()
+                    ->afterStateUpdated(function ($state, Forms\Set $set) {
+                        $supplier = \App\Models\Creditor::find($state);
+                        if ($supplier) {
+                            $set('cheque_receiver', $supplier->creditor_name);
+                        }
+                    }),
+
                 Forms\Components\Placeholder::make('account_balance')
                     ->label('Account Balance')
                     ->content(function (Forms\Get $get) {
@@ -81,6 +89,7 @@ class F5CreditorPaymentsResource extends Resource
                         $balance = ImportantParameterHelper::getBankBalance($account->account_number);
                         return number_format($balance, 2);
                     }),
+
                 Forms\Components\TextInput::make('cheque_receiver')
                     ->label('Cheque Receiver')
                     ->readOnly(),
@@ -118,6 +127,12 @@ class F5CreditorPaymentsResource extends Resource
                     ->reorderable()
                     ->collapsible()
                     ->itemLabel(fn (array $state): ?string => $state['details'] ?? null),
+
+                Forms\Components\Select::make('payment_type')
+                    ->label('Payment Type')
+                    ->options(ImportantParameterHelper::getValues('payment_types'))
+                    ->required(),
+
                 Forms\Components\Placeholder::make('total_amount')
                     ->label('Total Amount')
                     ->content(function (Forms\Get $get) {
@@ -127,10 +142,6 @@ class F5CreditorPaymentsResource extends Resource
                         }
                         return number_format($total, 2);
                     }),
-                Forms\Components\Select::make('payment_type')
-                    ->label('Payment Type')
-                    ->options(ImportantParameterHelper::getValues('payment_types'))
-                    ->required(),
             ]);
     }
 
