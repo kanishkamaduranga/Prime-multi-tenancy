@@ -34,8 +34,7 @@ class F5CreditorPaymentsResource extends Resource
                     ->label('Coupon Number'),
                 Forms\Components\Select::make('department_id')
                     ->label('Department')
-                    ->options(fn () => \App\Models\Department::pluck('department', 'id'))
-
+                    ->relationship('department', 'department')
                     ->searchable()
                     ->required()
                     ->live(),
@@ -43,7 +42,6 @@ class F5CreditorPaymentsResource extends Resource
                     ->label('Supplier')
                     ->relationship('supplier', 'creditor_name')
                     ->searchable()
-                    ->options(fn () => \App\Models\Creditor::pluck('creditor_name', 'id'))
                     ->required()
                     ->live()
                     ->afterStateUpdated(function ($state, Forms\Set $set) {
@@ -89,7 +87,6 @@ class F5CreditorPaymentsResource extends Resource
                 Forms\Components\Textarea::make('note')
                     ->label('Note'),
                 Forms\Components\Repeater::make('paymentDetails')
-                    ->relationship()
                     ->schema([
                         Forms\Components\TextInput::make('details')
                             ->label('Details')

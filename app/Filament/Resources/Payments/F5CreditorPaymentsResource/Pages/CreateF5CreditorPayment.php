@@ -12,8 +12,11 @@ class CreateF5CreditorPayment extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $total = 0;
-        foreach ($data['paymentDetails'] as $detail) {
-            $total += $detail['amount'];
+        if (isset($data['paymentDetails'])) {
+            foreach ($data['paymentDetails'] as $detail) {
+                $total += $detail['amount'];
+            }
+            $data['payment_details'] = json_encode($data['paymentDetails']);
         }
         $data['total_amount'] = $total;
         $data['payment_created_by'] = auth()->id();
