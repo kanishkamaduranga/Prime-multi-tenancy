@@ -16,7 +16,6 @@ class CreateF5CreditorPayment extends CreateRecord
             foreach ($data['paymentDetails'] as $detail) {
                 $total += $detail['amount'];
             }
-            $data['payment_details'] = json_encode($data['paymentDetails']);
         }
         $data['total_amount'] = $total;
         $data['payment_created_by'] = auth()->id();

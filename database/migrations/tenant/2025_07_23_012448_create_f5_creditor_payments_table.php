@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('cheque_receiver', 200);
             $table->text('note')->nullable();
             $table->double('total_amount');
-            $table->json('payment_details')->nullable();
             $table->string('payment_type', 20);
             $table->foreignId('payment_created_by')->constrained('users');
             $table->string('status', 20)->default('pending');

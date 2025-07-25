@@ -88,6 +88,7 @@ class F5CreditorPaymentsResource extends Resource
                 Forms\Components\Textarea::make('note')
                     ->label('Note'),
                 Forms\Components\Repeater::make('paymentDetails')
+                    ->relationship()
                     ->schema([
                         Forms\Components\TextInput::make('details')
                             ->label('Details')
