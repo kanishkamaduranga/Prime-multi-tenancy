@@ -13,6 +13,8 @@ class EditF5CreditorPayment extends EditRecord
 {
     protected static string $resource = F5CreditorPaymentsResource::class;
 
+    public $state = [];
+
     protected function getHeaderWidgets(): array
     {
         $status = $this->record->status;
@@ -164,12 +166,17 @@ class EditF5CreditorPayment extends EditRecord
         ]);
     }
 
+    protected function fillForm(): void
+    {
+        parent::fillForm();
+        $this->state = $this->form->getState();
+    }
+
     public function issueChequeNumber(): void
     {
-        $data = $this->form->getRawState();
         $this->record->chequeIssue()->create([
-            'cheque_number' => $data['cheque_number'],
-            'note_cheque_number_issue' => $data['note_cheque_number_issue'],
+            'cheque_number' => $this->state['cheque_number'],
+            'note_cheque_number_issue' => $this->state['note_cheque_number_issue'],
             'cheque_number_issue_by' => auth()->id(),
             'check_number_issued_time' => now(),
         ]);
