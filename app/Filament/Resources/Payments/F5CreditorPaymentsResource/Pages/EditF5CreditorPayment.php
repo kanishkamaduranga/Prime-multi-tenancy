@@ -7,6 +7,7 @@ use Filament\Resources\Pages\EditRecord;
 use Filament\Forms;
 use App\Models\F5CreditorPayment;
 use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
 
 class EditF5CreditorPayment extends EditRecord
 {
@@ -36,9 +37,7 @@ class EditF5CreditorPayment extends EditRecord
 
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\DeleteAction::make(),
-        ];
+        return [];
     }
 
     protected function getFormSchema(): array
