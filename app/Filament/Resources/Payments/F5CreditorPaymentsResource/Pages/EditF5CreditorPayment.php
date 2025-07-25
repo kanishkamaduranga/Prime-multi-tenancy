@@ -117,28 +117,28 @@ class EditF5CreditorPayment extends EditRecord
         $actions = [];
 
         if ($status === 'pending' && auth()->user()->can('f5_creaditor-payments_approve')) {
-            $actions[] = Actions\ButtonAction::make('approve')
+            $actions[] = Action::make('approve')
                 ->label('Approve')
                 ->action('approve');
-            $actions[] = Actions\ButtonAction::make('reject')
+            $actions[] = Action::make('reject')
                 ->label('Reject')
                 ->action('reject');
         }
 
         if ($status === 'approved' && auth()->user()->can('f5_creaditor-payments_cheque_number_issue')) {
-            $actions[] = Actions\ButtonAction::make('issue_cheque_number')
+            $actions[] = Action::make('issue_cheque_number')
                 ->label('Issue Cheque Number')
                 ->action('issueChequeNumber');
         }
 
         if ($status === 'cheque_number_issued' && auth()->user()->can('f5_creaditor-payments_cheque_issue')) {
-            $actions[] = Actions\ButtonAction::make('issue_cheque')
+            $actions[] = Action::make('issue_cheque')
                 ->label('Issue Cheque')
                 ->action('issueCheque');
         }
 
         if ($status === 'cheque_issued' && auth()->user()->can('f5_creaditor-payments_cheque_print')) {
-            $actions[] = Actions\ButtonAction::make('print_cheque')
+            $actions[] = Action::make('print_cheque')
                 ->label('Print Cheque')
                 ->action('printCheque');
         }
