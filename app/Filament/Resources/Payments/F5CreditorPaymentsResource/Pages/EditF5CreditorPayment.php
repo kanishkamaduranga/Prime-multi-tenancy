@@ -17,24 +17,7 @@ class EditF5CreditorPayment extends EditRecord
 
     protected function getHeaderWidgets(): array
     {
-        $status = $this->record->status;
-        $widgets = [];
-
-        $widgets[] = \App\Filament\Widgets\PaymentDetailsWidget::class;
-
-        if (in_array($status, ['approved', 'rejected', 'cheque_number_issued', 'cheque_issued', 'cheque_printed'])) {
-            $widgets[] = \App\Filament\Widgets\ApprovalWidget::class;
-        }
-
-        if (in_array($status, ['cheque_number_issued', 'cheque_issued', 'cheque_printed'])) {
-            $widgets[] = \App\Filament\Widgets\ChequeNumberWidget::class;
-        }
-
-        if (in_array($status, ['cheque_issued', 'cheque_printed'])) {
-            $widgets[] = \App\Filament\Widgets\ChequeIssuedWidget::class;
-        }
-
-        return $widgets;
+        return [];
     }
 
     protected function getHeaderActions(): array
@@ -42,62 +25,10 @@ class EditF5CreditorPayment extends EditRecord
         return [];
     }
 
-    protected function getFormSchema(): array
+    public function getRelationManagers(): array
     {
-        $status = $this->record->status;
-
         return [
-            Forms\Components\Wizard::make([
-                Forms\Components\Wizard\Step::make('Payment Form')
-                    ->schema([
-                        Forms\Components\Section::make()->schema(
-                            F5CreditorPaymentsResource::getFormSchema()
-                        )->columns(2)
-                    ])
-                    ->visible(auth()->user()->can('f5_creaditor-payments_create')),
-
-                Forms\Components\Wizard\Step::make('Approval')
-                    ->schema([
-                        Forms\Components\Textarea::make('note_approved_or_rejected')
-                            ->label('Note'),
-                    ])
-                    ->visible(auth()->user()->can('f5_creaditor-payments_approve') && $status === 'pending'),
-
-                Forms\Components\Wizard\Step::make('Issue Cheque Number')
-                    ->schema([
-                        Forms\Components\TextInput::make('cheque_number')
-                            ->label('Cheque Number')
-                            ->required(),
-                        Forms\Components\Textarea::make('note_cheque_number_issue')
-                            ->label('Note'),
-                    ])
-                    ->visible(auth()->user()->can('f5_creaditor-payments_cheque_number_issue') && $status === 'approved'),
-
-                Forms\Components\Wizard\Step::make('Issue Cheque')
-                    ->schema([
-                        Forms\Components\Checkbox::make('cooperative_stamp')
-                            ->label('Cooperative Stamp'),
-                        Forms\Components\Radio::make('valid_date')
-                            ->label('Valid Date')
-                            ->options(ImportantParameterHelper::getValues('cheques_valid_dates'))
-                            ->required(),
-                        Forms\Components\Radio::make('permissions')
-                            ->label('Permissions')
-                            ->options(ImportantParameterHelper::getValues('cheques_permissions'))
-                            ->required(),
-                        Forms\Components\CheckboxList::make('need_to_signature')
-                            ->label('Need to Signature')
-                            ->options(ImportantParameterHelper::getValues('cheques_signatures'))
-                            ->required(),
-                    ])
-                    ->visible(auth()->user()->can('f5_creaditor-payments_cheque_issue') && $status === 'cheque_number_issued'),
-
-                Forms\Components\Wizard\Step::make('Print Cheque')
-                    ->schema([
-                        \App\Filament\Widgets\ChequePrintPreview::class,
-                    ])
-                    ->visible(auth()->user()->can('f5_creaditor-payments_cheque_print') && $status === 'cheque_issued'),
-            ])->startOnStep($this->getStartStep()),
+            \App\Filament\Resources\Payments\F5CreditorPaymentsResource\RelationManagers\PaymentDetailsRelationManager::class,
         ];
     }
 
