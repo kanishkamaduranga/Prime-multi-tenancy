@@ -89,11 +89,15 @@ class F5CreditorPaymentsResource extends Resource
                     ->label('Note'),
                 Forms\Components\Repeater::make('paymentDetails')
                     ->relationship()
+                    ->mutateRelationshipDataBeforeCreateUsing(function (array $data): array {
+                        $data['reference_table'] = 'f5_creditor_payments';
+                        return $data;
+                    })
                     ->schema([
                         Forms\Components\TextInput::make('details')
                             ->label('Details')
                             ->required(),
-                        Forms\Components\TextInput::make('amount')
+                        Forms\Components\TextInput::make('price')
                             ->label('Amount')
                             ->numeric()
                             ->required()
