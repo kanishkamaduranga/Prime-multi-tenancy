@@ -166,7 +166,7 @@ class EditF5CreditorPayment extends EditRecord
 
     public function issueChequeNumber(): void
     {
-        $data = $this->getWizardStepData('Issue Cheque Number');
+        $data = $this->form->getState();
         $this->record->chequeIssue()->create([
             'cheque_number' => $data['cheque_number'],
             'note_cheque_number_issue' => $data['note_cheque_number_issue'],
