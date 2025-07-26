@@ -87,12 +87,48 @@ class F5CreditorPaymentsResource extends Resource
                     ->readOnly(),
                 Forms\Components\Textarea::make('note')
                     ->label('Note'),
+                Forms\Components\Repeater::make('paymentDetails')
+                    ->relationship()
+                    ->mutateRelationshipDataBeforeCreateUsing(function (array $data): array {
+                        $data['reference_table'] = 'f5_creditor_payments';
+                        return $data;
+                    })
+                    ->schema([
+                        Forms\Components\TextInput::make('details')
+                            ->label('Details')
+                            ->required(),
+                        Forms\Components\TextInput::make('price')
+                            ->label('Amount')
+                            ->numeric()
+                            ->required()
+                            ->live(debounce: 500)
+                            ->afterStateUpdated(function (Forms\Get $get, Forms\Set $set) {
+                                self::updateTotalAmount($get, $set);
+                            }),
+                        Forms\Components\Select::make('place_id')
+                            ->label('Place')
+                            ->options(function (Forms\Get $get) {
+                                if (!$get('../../department_id')) {
+                                    return \App\Models\Branch::pluck('branch_name', 'id');
+                                }
+                                return \App\Models\Branch::where('department_id', $get('../../department_id'))
+                                    ->pluck('branch_name', 'id');
+                            })
+                            ->searchable()
+                            ->required(),
+                    ])
+                    ->columns(3)
+                    ->defaultItems(1)
+                    ->addActionLabel('Add Payment Detail')
+                    ->reorderable()
+                    ->collapsible()
+                    ->itemLabel(fn (array $state): ?string => $state['details'] ?? null),
                 Forms\Components\Placeholder::make('total_amount_placeholder')
                     ->label('Total Amount')
                     ->content(function (Forms\Get $get) {
                         $total = 0;
                         foreach ($get('paymentDetails') ?? [] as $detail) {
-                            $total += $detail['amount'] ?? 0;
+                            $total += $detail['price'] ?? 0;
                         }
                         return number_format($total, 2);
                     }),
