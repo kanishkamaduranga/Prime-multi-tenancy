@@ -14,7 +14,7 @@ class CreateF5CreditorPayment extends CreateRecord
         $total = 0;
         if (isset($data['paymentDetails'])) {
             foreach ($data['paymentDetails'] as $detail) {
-                $total += $detail['amount'];
+                $total += $detail['price'];
             }
         }
         $data['total_amount'] = $total;
