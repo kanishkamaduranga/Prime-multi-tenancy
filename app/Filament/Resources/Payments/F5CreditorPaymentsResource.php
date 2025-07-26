@@ -93,6 +93,13 @@ class F5CreditorPaymentsResource extends Resource
                         $data['reference_table'] = 'f5_creditor_payments';
                         return $data;
                     })
+                    ->afterStateUpdated(function (Forms\Get $get, Forms\Set $set) {
+                        $total = 0;
+                        foreach ($get('paymentDetails') as $detail) {
+                            $total += $detail['price'];
+                        }
+                        $set('total_amount', $total);
+                    })
                     ->schema([
                         Forms\Components\TextInput::make('details')
                             ->label('Details')
