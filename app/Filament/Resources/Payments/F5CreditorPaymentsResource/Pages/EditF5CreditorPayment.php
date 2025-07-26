@@ -17,7 +17,9 @@ class EditF5CreditorPayment extends EditRecord
 
     protected function getHeaderWidgets(): array
     {
-        return [];
+        return [
+            \App\Filament\Widgets\f5\creditor\PaymentDetailsWidget::class,
+        ];
     }
 
     protected function getHeaderActions(): array
