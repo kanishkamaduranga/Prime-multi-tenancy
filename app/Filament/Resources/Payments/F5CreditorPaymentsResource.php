@@ -139,8 +139,15 @@ class F5CreditorPaymentsResource extends Resource
                         }
                         return number_format($total, 2);
                     }),
-                Forms\Components\Hidden::make('total_amount')
-                    ->default(0),
+                Forms\Components\Placeholder::make('total_amount')
+                    ->label('Total Amount')
+                    ->content(function (Forms\Get $get) {
+                        $total = 0;
+                        foreach ($get('paymentDetails') ?? [] as $detail) {
+                            $total += $detail['price'] ?? 0;
+                        }
+                        return number_format($total, 2);
+                    }),
                 Forms\Components\Select::make('payment_type')
                     ->label('Payment Type')
                     ->options(ImportantParameterHelper::getValues('payment_types'))
@@ -166,7 +173,10 @@ class F5CreditorPaymentsResource extends Resource
                 Tables\Columns\TextColumn::make('voucher_number'),
                 Tables\Columns\TextColumn::make('department.department'),
                 Tables\Columns\TextColumn::make('supplier.creditor_name'),
-                Tables\Columns\TextColumn::make('total_amount'),
+                Tables\Columns\TextColumn::make('total_amount')
+                    ->state(function ($record) {
+                        return $record->paymentDetails->sum('price');
+                    }),
                 Tables\Columns\TextColumn::make('status'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
