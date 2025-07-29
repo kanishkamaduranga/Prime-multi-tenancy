@@ -62,7 +62,7 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                             ->helperText('Some departments may be disabled based on validation rules')
                             ->disableOptionWhen(function (string $value) {
                                 $validDepartments = app(ValidationHelper::class)
-                                    ->formConfigValidation('creditors_list');
+                                    ->formConfigValidation('F5PaymentPerchByHeadOfficeResource');
                                 return !in_array($value, $validDepartments);
                             })
                             ->live()
