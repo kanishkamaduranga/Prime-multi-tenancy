@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use App\Helpers\ValidationHelper;
 
 class F5PaymentPerchByHeadOfficeResource extends Resource
 {
@@ -57,6 +58,13 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                             ->label(__('f28.department'))
                             ->options(fn () => \App\Models\Department::pluck('department', 'id'))
                             ->required()
+                            ->loadingMessage('Loading valid departments...')
+                            ->helperText('Some departments may be disabled based on validation rules')
+                            ->disableOptionWhen(function (string $value) {
+                                $validDepartments = app(ValidationHelper::class)
+                                    ->formConfigValidation('creditors_list');
+                                return !in_array($value, $validDepartments);
+                            })
                             ->live()
                             ->searchable(),
 
