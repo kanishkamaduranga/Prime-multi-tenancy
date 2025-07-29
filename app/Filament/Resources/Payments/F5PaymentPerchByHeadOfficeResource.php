@@ -43,6 +43,7 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
             ->schema([
                 Forms\Components\Section::make(__('f28.regular_payments'))
                     ->schema([
+
                         Forms\Components\TextInput::make('voucher_number')
                             ->label(__('f28.voucher_number'))
                             ->disabled()
@@ -85,8 +86,12 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                             ->required()
                             ->searchable()
                             ->live()
-                            ->afterStateUpdated(function ($state) {
-                                // This triggers the balance update
+                            ->afterStateUpdated(function ($state, Forms\Set $set)  {
+                                $account = \App\Models\BankAccount::find($state);
+                                if ($account) {
+                                    $balance = ImportantParameterHelper::getBankBalance($account->account_number);
+                                    $set('existing_account_balance', $balance);
+                                }
                             }),
 
                         Forms\Components\Placeholder::make('account_balance')
@@ -126,6 +131,21 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
 
                         Forms\Components\Hidden::make('payment_analysis')
                             ->default('payment'),
+
+                        Forms\Components\Hidden::make('total_amount')
+                            ->default(0)
+                            ->dehydrated()
+                            ->afterStateHydrated(function (Forms\Set $set, Forms\Get $get) {
+                                // Calculate initial total when editing
+                                $total = 0;
+                                foreach ($get('paymentDetails') ?? [] as $detail) {
+                                    $total += $detail['price'] ?? 0;
+                                }
+                                $set('total_amount', $total);
+                            }),
+
+                        Forms\Components\Hidden::make('existing_account_balance')->default(0)->dehydrated(),
+                        Forms\Components\Hidden::make('status')->default('pending')->dehydrated(),
                     ])
                     ->columns(2),
 
@@ -168,9 +188,17 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                             ->addActionLabel(__('f28.add_payment_detail'))
                             ->reorderable()
                             ->collapsible()
+                            ->live()
+                            ->afterStateUpdated(function (Forms\Get $get, Forms\Set $set) {
+                                $total = 0;
+                                foreach ($get('paymentDetails') ?? [] as $detail) {
+                                    $total += $detail['price'] ?? 0;
+                                }
+                                $set('total_amount', $total);
+                            })
                             ->itemLabel(fn (array $state): ?string => $state['details'] ?? null),
 
-                        Forms\Components\Placeholder::make('total_amount')
+                        Forms\Components\Placeholder::make('total_amount_display')
                             ->label(__('f28.total_amount'))
                             ->content(function (Forms\Get $get) {
                                 $total = 0;
@@ -183,6 +211,20 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                     ]),
             ]);
     }
+
+    public static function fillForm(Form $form): Form
+    {
+        \Log::info('Fill form called'); // Debugging
+
+        return $form
+            ->schema(static::form($form)->getComponents())
+            ->state([
+                'status' => 'pending',
+                'total_amount' => 0,
+                'existing_account_balance' => 0,
+            ]);
+    }
+
 
     private static function updateTotalAmount(Forms\Get $get, Forms\Set $set): void
     {
@@ -211,6 +253,18 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
     {
         return $table
             ->columns([
+
+                Tables\Columns\TextColumn::make('status')
+                    ->label(__('f28.status'))
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'draft' => 'gray',
+                        'pending' => 'warning',
+                        'approved' => 'success',
+                        'rejected' => 'danger',
+                        'completed' => 'primary',
+                    }),
+
                 Tables\Columns\TextColumn::make('voucher_number')
                     ->label(__('f28.voucher_number'))
                     ->searchable(),

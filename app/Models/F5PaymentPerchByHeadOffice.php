@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ImportantParameterHelper;
 
 class F5PaymentPerchByHeadOffice extends Model
 {
@@ -12,11 +13,14 @@ class F5PaymentPerchByHeadOffice extends Model
     protected $table = 'f5_payment_perches_by_head_office';
 
     protected $fillable = [
+        'status',
         'voucher_number',
         'cooppen_number',
         'department_id',
         'supplier_id',
         'bank_account_id',
+        'total_amount',
+        'existing_account_balance',
         'cheque_receiver',
         'summary',
         'payment_type',
@@ -72,6 +76,13 @@ class F5PaymentPerchByHeadOffice extends Model
 
             // Set created by
             $model->created_by = auth()->id();
+
+            if (empty($model->existing_account_balance)) {
+                $model->existing_account_balance = ImportantParameterHelper::getBankBalance($model->bank_account->account_number);
+            }
+            if (empty($model->status)) {
+                $model->status = 'pending';
+            }
         });
     }
 }

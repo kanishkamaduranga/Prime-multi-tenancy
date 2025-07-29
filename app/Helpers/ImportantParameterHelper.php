@@ -17,7 +17,7 @@ class ImportantParameterHelper
      **/
     public static function getBankBalance($account_number)
     {
-        return 000.00;
+        return round(mt_rand(1, 9999), 2);
     }
 
     /**
