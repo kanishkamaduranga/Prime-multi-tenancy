@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use App\Helpers\ValidationHelper;
 
 class F5PaymentPerchByHeadOfficeResource extends Resource
 {
@@ -43,6 +44,7 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
             ->schema([
                 Forms\Components\Section::make(__('f28.regular_payments'))
                     ->schema([
+
                         Forms\Components\TextInput::make('voucher_number')
                             ->label(__('f28.voucher_number'))
                             ->disabled()
@@ -56,6 +58,13 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                             ->label(__('f28.department'))
                             ->options(fn () => \App\Models\Department::pluck('department', 'id'))
                             ->required()
+                            ->loadingMessage('Loading valid departments...')
+                            ->helperText('Some departments may be disabled based on validation rules')
+                            ->disableOptionWhen(function (string $value) {
+                                $validDepartments = app(ValidationHelper::class)
+                                    ->formConfigValidation('F5PaymentPerchByHeadOfficeResource');
+                                return !in_array($value, $validDepartments);
+                            })
                             ->live()
                             ->searchable(),
 
@@ -85,8 +94,12 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                             ->required()
                             ->searchable()
                             ->live()
-                            ->afterStateUpdated(function ($state) {
-                                // This triggers the balance update
+                            ->afterStateUpdated(function ($state, Forms\Set $set)  {
+                                $account = \App\Models\BankAccount::find($state);
+                                if ($account) {
+                                    $balance = ImportantParameterHelper::getBankBalance($account->account_number);
+                                    $set('existing_account_balance', $balance);
+                                }
                             }),
 
                         Forms\Components\Placeholder::make('account_balance')
@@ -126,6 +139,21 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
 
                         Forms\Components\Hidden::make('payment_analysis')
                             ->default('payment'),
+
+                        Forms\Components\Hidden::make('total_amount')
+                            ->default(0)
+                            ->dehydrated()
+                            ->afterStateHydrated(function (Forms\Set $set, Forms\Get $get) {
+                                // Calculate initial total when editing
+                                $total = 0;
+                                foreach ($get('paymentDetails') ?? [] as $detail) {
+                                    $total += $detail['price'] ?? 0;
+                                }
+                                $set('total_amount', $total);
+                            }),
+
+                        Forms\Components\Hidden::make('existing_account_balance')->default(0)->dehydrated(),
+                        Forms\Components\Hidden::make('status')->default('pending')->dehydrated(),
                     ])
                     ->columns(2),
 
@@ -168,9 +196,17 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                             ->addActionLabel(__('f28.add_payment_detail'))
                             ->reorderable()
                             ->collapsible()
+                            ->live()
+                            ->afterStateUpdated(function (Forms\Get $get, Forms\Set $set) {
+                                $total = 0;
+                                foreach ($get('paymentDetails') ?? [] as $detail) {
+                                    $total += $detail['price'] ?? 0;
+                                }
+                                $set('total_amount', $total);
+                            })
                             ->itemLabel(fn (array $state): ?string => $state['details'] ?? null),
 
-                        Forms\Components\Placeholder::make('total_amount')
+                        Forms\Components\Placeholder::make('total_amount_display')
                             ->label(__('f28.total_amount'))
                             ->content(function (Forms\Get $get) {
                                 $total = 0;
@@ -183,6 +219,20 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                     ]),
             ]);
     }
+
+    public static function fillForm(Form $form): Form
+    {
+        \Log::info('Fill form called'); // Debugging
+
+        return $form
+            ->schema(static::form($form)->getComponents())
+            ->state([
+                'status' => 'pending',
+                'total_amount' => 0,
+                'existing_account_balance' => 0,
+            ]);
+    }
+
 
     private static function updateTotalAmount(Forms\Get $get, Forms\Set $set): void
     {
@@ -211,6 +261,18 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
     {
         return $table
             ->columns([
+
+                Tables\Columns\TextColumn::make('status')
+                    ->label(__('f28.status'))
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'draft' => 'gray',
+                        'pending' => 'warning',
+                        'approved' => 'success',
+                        'rejected' => 'danger',
+                        'completed' => 'primary',
+                    }),
+
                 Tables\Columns\TextColumn::make('voucher_number')
                     ->label(__('f28.voucher_number'))
                     ->searchable(),
@@ -250,6 +312,12 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                 Tables\Actions\ViewAction::make()->modal(),
                 Tables\Actions\EditAction::make()->modal(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('Approval')
+                    ->url(fn (F5PaymentPerchByHeadOffice $record): string => static::getUrl('approve', ['record' => $record]))
+                    ->visible(fn (F5PaymentPerchByHeadOffice $record): bool => $record->status === 'pending')
+                    ->label(__('f28.approval'))
+                    ->icon('heroicon-o-check-circle')
+                    ->color('success'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -272,6 +340,7 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
     {
         return [
             'index' => Payments\F5PaymentPerchByHeadOfficeResource\Pages\ListF5PaymentPerchByHeadOffices::route('/'),
+            'approve' => Payments\F5PaymentPerchByHeadOfficeResource\Pages\ApprovePayment::route('/{record}/approve'),
         ];
     }
 
