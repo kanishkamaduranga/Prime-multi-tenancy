@@ -26,6 +26,8 @@ class F5PaymentPerchByHeadOffice extends Model
         'payment_type',
         'payment_analysis',
         'created_by',
+        'approved_or_rej_by',
+        'approved_or_rej_at',
     ];
 
     public function department()

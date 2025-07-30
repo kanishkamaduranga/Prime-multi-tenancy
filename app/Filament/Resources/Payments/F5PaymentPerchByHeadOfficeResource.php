@@ -312,6 +312,12 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
                 Tables\Actions\ViewAction::make()->modal(),
                 Tables\Actions\EditAction::make()->modal(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('Approval')
+                    ->url(fn (F5PaymentPerchByHeadOffice $record): string => static::getUrl('approve', ['record' => $record]))
+                    ->visible(fn (F5PaymentPerchByHeadOffice $record): bool => $record->status === 'pending')
+                    ->label(__('f28.approval'))
+                    ->icon('heroicon-o-check-circle')
+                    ->color('success'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -334,6 +340,7 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
     {
         return [
             'index' => Payments\F5PaymentPerchByHeadOfficeResource\Pages\ListF5PaymentPerchByHeadOffices::route('/'),
+            'approve' => Payments\F5PaymentPerchByHeadOfficeResource\Pages\ApprovePayment::route('/{record}/approve'),
         ];
     }
 
