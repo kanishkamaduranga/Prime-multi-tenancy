@@ -347,7 +347,6 @@ class F5PaymentPerchByHeadOfficeResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->with(['department', 'supplier', 'paymentDetails'])
-            ->where('created_by', auth()->id());
+            ->with(['department', 'supplier', 'paymentDetails']);
     }
 }
